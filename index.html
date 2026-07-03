@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>RightlyHK</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',sans-serif;background:#f7f8fa;color:#1a1a2e;font-size:15px}
+:root{--blue:#1a5276;--blue-mid:#2980b9;--red:#c0392b;--red-light:#fdecea;--green:#1e8449;--green-light:#eafaf1;--border:#e0e0e0;--muted:#666;--yellow:#f0b429}
+a{color:inherit;text-decoration:none}
+nav{background:var(--blue);color:#fff;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:56px;position:sticky;top:0;z-index:100}
+.logo{font-size:20px;font-weight:700;cursor:pointer}.logo span{color:var(--yellow)}
+.nav-links{display:flex;gap:1.5rem;font-size:14px}
+.nav-links a{opacity:.85;cursor:pointer}.nav-links a:hover{opacity:1}
+.lang-btn{background:rgba(255,255,255,.15);border:none;color:#fff;padding:4px 10px;border-radius:4px;font-size:13px;cursor:pointer}
+.page{display:none}.page.on{display:block}
+.hero{background:linear-gradient(135deg,#1a5276,#1f618d);color:#fff;padding:4rem 2rem 3rem;text-align:center}
+.hero h1{font-size:2.1rem;font-weight:700;margin-bottom:.75rem}
+.hero p{font-size:1rem;opacity:.88;max-width:540px;margin:0 auto 2rem}
+.btn-gold{background:var(--yellow);color:#1a1a2e;border:none;padding:.7rem 1.8rem;font-size:15px;font-weight:600;border-radius:6px;cursor:pointer}
+.btn-gold:hover{background:#dea020}
+.btn-white{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.5);padding:.65rem 1.4rem;font-size:14px;border-radius:6px;cursor:pointer;margin-left:.75rem}
+.btn-white:hover{border-color:#fff}
+.how{display:flex;justify-content:center;gap:2rem;padding:2rem;background:#fff;border-bottom:1px solid var(--border);flex-wrap:wrap}
+.how-step{text-align:center;max-width:140px}
+.how-num{width:34px;height:34px;border-radius:50%;background:var(--blue);color:#fff;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center;margin:0 auto .5rem}
+.how-step h4{font-size:13px;font-weight:600;margin-bottom:.2rem}
+.how-step p{font-size:12px;color:var(--muted)}
+main{max-width:860px;margin:0 auto;padding:2rem 1.5rem}
+.card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:1.5rem;margin-bottom:1.5rem}
+.prog-bar{display:flex;gap:3px;margin-bottom:1.25rem}
+.prog-seg{flex:1;height:4px;border-radius:2px;background:var(--border);transition:background .3s}
+.prog-seg.done{background:var(--blue)}.prog-seg.active{background:var(--blue-mid)}
+.step-label{font-size:12px;color:var(--muted);margin-bottom:1rem}
+.wstep{display:none}.wstep.on{display:block}
+.prov-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin-bottom:.75rem}
+.prov-btn{padding:.5rem .4rem;border:1px solid var(--border);border-radius:8px;background:#fff;font-size:11px;cursor:pointer;text-align:center;transition:all .15s;display:flex;flex-direction:column;align-items:center;gap:4px}
+.prov-btn:hover,.prov-btn.on{border-color:var(--blue);background:#eaf4fb;box-shadow:0 2px 8px rgba(26,82,118,.12)}
+.prov-logo-wrap{width:52px;height:28px;display:flex;align-items:center;justify-content:center}
+.prov-label{font-size:11px;font-weight:600;color:#444;line-height:1}
+.issue-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-bottom:.75rem}
+.issue-btn{padding:.5rem .75rem;border:1px solid var(--border);border-radius:6px;background:#fff;font-size:13px;cursor:pointer;text-align:left;transition:all .15s}
+.issue-btn:hover,.issue-btn.on{border-color:var(--blue);background:#eaf4fb;color:var(--blue);font-weight:600}
+.tone-row{display:flex;gap:.5rem;margin-bottom:.75rem;flex-wrap:wrap}
+.tone-btn{padding:.3rem .8rem;border:1px solid var(--border);border-radius:20px;background:#fff;font-size:12px;cursor:pointer;transition:all .15s}
+.tone-btn:hover,.tone-btn.on{border-color:var(--blue);background:#eaf4fb;color:var(--blue);font-weight:600}
+label{font-size:13px;font-weight:600;display:block;margin-bottom:.25rem;color:#333}
+input,textarea{width:100%;padding:.6rem .75rem;border:1px solid var(--border);border-radius:6px;font-size:14px;font-family:inherit;background:#fff;color:#1a1a2e;margin-bottom:.75rem;outline:none}
+input:focus,textarea:focus{border-color:var(--blue-mid)}
+textarea{min-height:110px;resize:vertical}
+.ai-section{background:#f0f7ff;border:1px solid #b8d4f0;border-radius:8px;padding:1.25rem;margin-top:.5rem;margin-bottom:.75rem}
+.ai-hdr{display:flex;align-items:center;gap:.5rem;margin-bottom:.75rem}
+.ai-badge{background:var(--blue);color:#fff;font-size:11px;font-weight:700;padding:2px 8px;border-radius:4px}
+.ai-load{display:flex;align-items:center;gap:.4rem;font-size:13px;color:var(--muted);padding:.4rem 0}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--blue-mid);display:inline-block;animation:blink 1.2s infinite}
+.dot:nth-child(2){animation-delay:.2s}.dot:nth-child(3){animation-delay:.4s}
+@keyframes blink{0%,80%,100%{opacity:.2}40%{opacity:1}}
+.ai-email-box{width:100%;min-height:200px;padding:.75rem;border:1.5px solid var(--blue-mid);border-radius:6px;font-size:13px;font-family:inherit;background:#fff;resize:vertical;outline:none;line-height:1.7;display:none}
+.ai-actions{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.5rem;display:none}
+.ai-btn{background:#fff;border:1px solid var(--blue-mid);color:var(--blue);padding:.35rem .85rem;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer}
+.ai-btn:hover{background:#eaf4fb}
+.lang-toggle-row{background:#f0f7ff;border:1px solid #b8d4f0;border-radius:8px;padding:.9rem 1rem;margin-bottom:.75rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem}
+.tip{background:#fffbea;border-left:4px solid var(--yellow);border-radius:0 6px 6px 0;padding:.75rem 1rem;font-size:13px;color:#7a5c00;margin-bottom:.75rem;line-height:1.7;display:none}
+.wnav{display:flex;justify-content:space-between;align-items:center;margin-top:1rem}
+.btn-back{background:#fff;border:1px solid var(--border);color:var(--muted);padding:.5rem 1.1rem;border-radius:6px;cursor:pointer;font-size:14px}
+.btn-next{background:var(--blue);color:#fff;border:none;padding:.5rem 1.4rem;border-radius:6px;cursor:pointer;font-size:14px;font-weight:600}
+.btn-next:disabled{opacity:.35;cursor:not-allowed}
+.review-box{background:#f9f9f9;border:1px solid var(--border);border-radius:8px;padding:1rem;margin-bottom:1rem;font-size:13px;line-height:2}
+.grp-label{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:.5rem}
+.custom-row{display:none;margin-bottom:.5rem}
+.success{text-align:center;padding:1.5rem 0}
+.success-icon{font-size:2.5rem;margin-bottom:.5rem}
+.case-badge{background:var(--green-light);border:1px solid var(--green);color:var(--green);padding:.4rem 1rem;border-radius:20px;font-size:14px;font-weight:700;display:inline-block;margin-bottom:.75rem}
+.badge{padding:2px 10px;border-radius:20px;font-size:12px;font-weight:600}
+.b-open{background:#fef3cd;color:#856404}.b-esc{background:var(--red-light);color:var(--red)}.b-res{background:var(--green-light);color:var(--green)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.5rem}
+.stat{background:#fff;border:1px solid var(--border);border-radius:8px;padding:1rem;text-align:center}
+.stat-n{font-size:24px;font-weight:700;color:var(--blue)}.stat-l{font-size:12px;color:var(--muted);margin-top:2px}
+.atabs{display:flex;gap:1rem;border-bottom:2px solid var(--border);margin-bottom:1.25rem;padding-bottom:.4rem}
+.atab{border:none;background:none;font-size:14px;font-weight:600;color:var(--muted);cursor:pointer;padding:.3rem .75rem;border-bottom:2px solid transparent;margin-bottom:-6px}
+.atab.on{color:var(--blue);border-bottom-color:var(--blue)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;padding:.6rem .75rem;border-bottom:2px solid var(--border);font-weight:700;color:var(--muted);font-size:11px;text-transform:uppercase}
+td{padding:.6rem .75rem;border-bottom:1px solid var(--border);vertical-align:middle}
+.act-btn{background:#f4f4f4;border:1px solid var(--border);border-radius:4px;padding:3px 9px;font-size:12px;cursor:pointer;margin-right:3px}
+.act-esc{background:var(--red-light);border-color:var(--red);color:var(--red)}
+.blog-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+@media(max-width:600px){.blog-grid{grid-template-columns:1fr}}
+.blog-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:1.25rem;cursor:pointer;transition:box-shadow .2s,transform .15s}
+.blog-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.1);transform:translateY(-2px)}
+.blog-card-tag{font-size:11px;font-weight:700;text-transform:uppercase;color:var(--red);letter-spacing:.5px;margin-bottom:.4rem}
+.blog-card h3{font-size:15px;font-weight:700;margin-bottom:.4rem;line-height:1.4;color:var(--blue)}
+.blog-card p{font-size:13px;color:var(--muted);line-height:1.5}
+.blog-card-meta{font-size:12px;color:var(--muted);margin-top:.6rem}
+.read-more{font-size:12px;font-weight:600;color:var(--blue);margin-top:.6rem;display:inline-block}
+.blog-hero{background:linear-gradient(135deg,#1a5276,#1f618d);color:#fff;padding:3.5rem 2rem 3rem}
+.blog-hero h1{font-size:2rem;font-weight:700;line-height:1.35;max-width:680px;margin-bottom:1rem}
+.blog-hero .meta{font-size:14px;opacity:.75}
+.blog-breadcrumb{font-size:13px;color:var(--muted);margin-bottom:2rem;display:flex;align-items:center;gap:.4rem}
+.blog-breadcrumb a{color:var(--blue);cursor:pointer}.blog-breadcrumb a:hover{text-decoration:underline}
+.blog-content{font-size:15.5px;line-height:2;color:#2c2c2c;max-width:680px}
+.blog-content h3{font-size:17px;font-weight:700;margin:2.25rem 0 .65rem;color:var(--blue);padding-bottom:.4rem;border-bottom:2px solid #eaf4fb}
+.blog-content ul,.blog-content ol{padding-left:1.6rem;margin:.65rem 0 1rem}
+.blog-content li{margin-bottom:.6rem;line-height:1.8}
+.blog-content p{margin-bottom:1rem}
+.blog-tip{background:#fffbea;border-left:4px solid var(--yellow);border-radius:0 6px 6px 0;padding:1rem 1.25rem;font-size:14px;color:#7a5c00;margin:1.5rem 0;line-height:1.7}
+.blog-cta-box{background:var(--blue);color:#fff;border-radius:10px;padding:1.75rem;margin-top:2.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.blog-nav-row{display:flex;gap:1rem;margin-top:2rem;flex-wrap:wrap}
+.blog-nav-btn{flex:1;background:#fff;border:1px solid var(--border);border-radius:8px;padding:1.1rem;cursor:pointer;text-align:left;transition:box-shadow .15s;min-width:180px}
+.blog-nav-btn:hover{box-shadow:0 2px 10px rgba(0,0,0,.08)}
+.blog-nav-btn .dir{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:.25rem}
+.blog-nav-btn .ttl{font-size:13px;font-weight:600;color:var(--blue);line-height:1.3}
+.bl-row{display:flex;gap:.5rem}
+.bl-btn{padding:.35rem .9rem;border:1px solid var(--border);border-radius:20px;background:#fff;font-size:13px;cursor:pointer;font-weight:600;color:var(--muted)}
+.bl-btn.on{background:var(--blue);color:#fff;border-color:var(--blue)}
+footer{background:var(--blue);color:rgba(255,255,255,.7);text-align:center;padding:1.5rem;font-size:13px;margin-top:3rem}
+footer strong{color:#fff}
+.fab{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--red);color:#fff;border:none;border-radius:6px;padding:.6rem 1rem;font-size:13px;font-weight:600;cursor:pointer;z-index:200;box-shadow:0 2px 10px rgba(0,0,0,.25)}
+</style>
+</head>
+<body>
+
+<nav id="main-nav">
+  <div class="logo" onclick="goPage('home')">Rightly<span>HK</span></div>
+  <div class="nav-links">
+    <a id="nav-complaint" onclick="goPage('home');setTimeout(function(){var el=document.getElementById('wizard-sec');if(el)el.scrollIntoView({behavior:'smooth'});},100)">File Complaint</a>
+    <a id="nav-guides" onclick="goPage('blog-list')">Guides</a>
+  </div>
+  <button class="lang-btn" id="lang-btn" onclick="toggleLang()">繁中</button>
+</nav>
+
+<!-- HOME -->
+<div class="page on" id="page-home">
+<div class="hero">
+  <h1 id="h-title">Your Rights. Your Voice. Resolved.</h1>
+  <p id="h-sub">Hong Kong's free telecom complaints platform — no signup needed, every reply tracked by email.</p>
+  <button class="btn-gold" id="hero-cta1" onclick="document.getElementById('wizard-sec').scrollIntoView({behavior:'smooth'})">Start My Complaint</button>
+  <button class="btn-white" id="hero-cta2" onclick="goPage('blog-list')">Read Guides</button>
+</div>
+<div class="how">
+  <div class="how-step"><div class="how-num">1</div><h4 id="hw1h">Pick Provider</h4><p id="hw1p">Select your telecom company</p></div>
+  <div class="how-step"><div class="how-num">2</div><h4 id="hw2h">Choose Issue</h4><p id="hw2p">Tell us what went wrong</p></div>
+  <div class="how-step"><div class="how-num">3</div><h4 id="hw3h">Add Details</h4><p id="hw3p">Describe &amp; AI-polish</p></div>
+  <div class="how-step"><div class="how-num">4</div><h4 id="hw4h">Review &amp; Send</h4><p id="hw4p">Confirm and submit</p></div>
+</div>
+<main>
+<section id="wizard-sec">
+<div class="card">
+  <div id="wiz-title" style="font-size:17px;font-weight:700;color:var(--blue);margin-bottom:1rem">📋 File a Complaint — No Login Required</div>
+  <div class="prog-bar">
+    <div class="prog-seg active" id="p1"></div>
+    <div class="prog-seg" id="p2"></div>
+    <div class="prog-seg" id="p3"></div>
+    <div class="prog-seg" id="p4"></div>
+  </div>
+
+  <!-- S1: Provider -->
+  <div class="wstep on" id="s1">
+    <div class="step-label" id="s1lbl">Step 1 of 4 — Select your telecom provider</div>
+    <div class="grp-label" id="lbl-fixed">Fixed Line / Broadband</div>
+    <div class="prov-grid" style="margin-bottom:1rem">
+      <button class="prov-btn" onclick="pickProv(this,'PCCW')"><div class="prov-logo-wrap"><svg viewBox="0 0 52 22" width="52" height="22"><rect width="52" height="22" rx="3" fill="#c00"/><text x="26" y="15.5" text-anchor="middle" fill="#fff" font-size="11" font-weight="700" font-family="Arial,sans-serif">PCCW</text></svg></div><span class="prov-label">PCCW</span></button>
+      <button class="prov-btn" onclick="pickProv(this,'HKT')"><div class="prov-logo-wrap"><svg viewBox="0 0 52 22" width="52" height="22"><rect width="52" height="22" rx="3" fill="#003087"/><text x="26" y="15.5" text-anchor="middle" fill="#fff" font-size="12" font-weight="700" font-family="Arial,sans-serif">HKT</text></svg></div><span class="prov-label">HKT</span></button>
+      <button class="prov-btn" onclick="pickProv(this,'HKBN')"><div class="prov-logo-wrap"><svg viewBox="0 0 52 22" width="52" height="22"><rect width="52" height="22" rx="3" fill="#e4002b"/><text x="26" y="15.5" text-anchor="middle" fill="#fff" font-size="11" font-weight="700" font-family="Arial,sans-serif">HKBN</text></svg></div><span class="prov-label">HKBN</span></button>
+      <button class="prov-btn" onclick="pickProv(this,'HGC Global Communications')"><div class="prov-logo-wrap"><svg viewBox="0 0 52 22" width="52" height="22"><rect width="52" height="22" rx="3" fill="#0072bc"/><text x="26" y="15.5" text-anchor="middle" fill="#fff" font-size="11" font-weight="700" font-family="Arial,sans-serif">HGC</text></svg></div><span class="prov-label">HGC Global</span></button>
+      <button class="prov-btn" onclick="pickProv(this,'China Mobile Hong Kong (Broadband)')"><div class="prov-logo-wrap"><svg viewBox="0 0 52 22" width="52" height="22"><rect width="52" height="22" rx="3" fill="#00a650"/><text x="26" y="15.5" text-anchor="middle" fill="#fff" font-size="9.5" font-weight="700" font-family="Arial,sans-serif">CMHK</text></svg></div><span class="prov-label">China Mobile</span></button>
+      <button class="prov-btn" onclick="pickProv(this,'Hong Kong Cable Television')"><div class="prov-logo-wrap"><svg viewBox="0 0 52 22" width="52" height="22"><rect width="52" height="22" rx="3" fill="#f60"/><text x="26" y="15.5" text-anchor="middle" fill="#fff" font-size="9" font-weight="700" font-family="Arial,sans-serif">HKCTV</text></svg></div><span class="prov-label">HK Cable TV</span></button>
+      <button class="prov-btn" onclick="pickProv(this,'WTT (HKBN Enterprise Solutions)')"><div class="prov-logo-wrap"><svg viewBox="0 0 52 22" width="52" height="22"><rect width="52" height="22" rx="3" fill="#1a1a2e"/><text x="26" y="15.5" text-anchor="middle" fill="#f0b429" font-size="11" font-weight="700" font-family="Arial,sans-serif">WTT</text></svg></div><span class="prov-label">WTT</span></button>
+    </div>
+    <div class="grp-label" id="lbl-mobile">Mobile</div>
+    <div class="prov-grid" style="margin-bottom:.75rem">
+      <button class="prov-btn" onclick="pickProv(this,'China Mobile Hong Kong (Mobile)')"><div class="prov-logo-wrap"><svg viewBox="0 0 52 22" width="52" height="22"><rect width="52" height="22" rx="3" fill="#00a650"/><text x="26" y="15.5" text-anchor="middle" fill="#fff" font-size="9.5" font-weight="700" font-family="Arial,sans-serif">CMHK</text></svg></div><span class="prov-label">China Mobile</span></button>
+      <button class="prov-btn" onclick="pickProv(this,'csl.')"><div class="prov-logo-wrap"><svg viewBox="0 0 52 22" width="52" height="22"><rect width="52" height="22" rx="3" fill="#e4002b"/><text x="26" y="15.5" text-anchor="middle" fill="#fff" font-size="12" font-weight="700" font-family="Arial,sans-serif" letter-spacing="1">csl.</text></svg></div><span class="prov-label">csl.</span></button>
+      <button class="prov-btn" onclick="pickProv(this,'1010')"><div class="prov-logo-wrap"><svg viewBox="0 0 52 22" width="52" height="22"><rect width="52" height="22" rx="3" fill="#6d2077"/><text x="26" y="15.5" text-anchor="middle" fill="#fff" font-size="12" font-weight="700" font-family="Arial,sans-serif">1010</text></svg></div><span class="prov-label">1010</span></button>
+      <button class="prov-btn" onclick="pickProv(this,'3 Hong Kong')"><div class="prov-logo-wrap"><svg viewBox="0 0 52 22" width="52" height="22"><rect width="52" height="22" rx="3" fill="#ee2e24"/><text x="26" y="16" text-anchor="middle" fill="#fff" font-size="16" font-weight="900" font-family="Arial,sans-serif">3</text></svg></div><span class="prov-label">3 Hong Kong</span></button>
+      <button class="prov-btn" onclick="pickProv(this,'SmarTone')"><div class="prov-logo-wrap"><svg viewBox="0 0 52 22" width="52" height="22"><rect width="52" height="22" rx="3" fill="#e4002b"/><text x="26" y="15" text-anchor="middle" fill="#fff" font-size="7.5" font-weight="700" font-family="Arial,sans-serif">SmarTone</text></svg></div><span class="prov-label">SmarTone</span></button>
+    </div>
+    <button class="prov-btn" style="width:100%;border-style:dashed;color:var(--blue);margin-bottom:.75rem;flex-direction:row;gap:.5rem;justify-content:center;padding:.65rem" onclick="pickProv(this,'__custom__')">
+      <span style="font-size:18px;line-height:1">+</span><span id="lbl-custom-btn" style="font-size:13px;font-weight:600">Company not listed? Enter manually</span>
+    </button>
+    <div class="custom-row" id="custom-row">
+      <label id="lbl-cn">Company name *</label>
+      <input type="text" id="custom-name" autocomplete="off" oninput="onCustomName()"/>
+      <label id="lbl-ce">Company complaint email (optional)</label>
+      <input type="text" id="custom-email" autocomplete="off"/>
+    </div>
+    <div class="wnav"><span></span><button class="btn-next" id="n1" onclick="goStep(2)" disabled>Next →</button></div>
+  </div>
+
+  <!-- S2: Issue -->
+  <div class="wstep" id="s2">
+    <div class="step-label" id="s2lbl">Step 2 of 4 — What is the issue?</div>
+    <div class="issue-grid">
+      <button class="issue-btn" id="ib1" onclick="pickIssue(this,'Billing / Overcharge')"></button>
+      <button class="issue-btn" id="ib2" onclick="pickIssue(this,'Service Outage')"></button>
+      <button class="issue-btn" id="ib3" onclick="pickIssue(this,'Contract Dispute')"></button>
+      <button class="issue-btn" id="ib4" onclick="pickIssue(this,'Poor Signal / Speed')"></button>
+      <button class="issue-btn" id="ib5" onclick="pickIssue(this,'Porting / SIM Issue')"></button>
+      <button class="issue-btn" id="ib6" onclick="pickIssue(this,'Customer Service')"></button>
+      <button class="issue-btn" id="ib7" onclick="pickIssue(this,'Cancellation Problem')"></button>
+      <button class="issue-btn" id="ib8" onclick="pickIssue(this,'Other')"></button>
+    </div>
+    <div class="wnav"><button class="btn-back" id="bk2" onclick="goStep(1)">← Back</button><button class="btn-next" id="n2" onclick="goStep(3)" disabled>Next →</button></div>
+  </div>
+
+  <!-- S3: Issue questions → Draft preview → Contact info -->
+  <div class="wstep" id="s3">
+    <div class="step-label" id="s3lbl">Step 3 of 4 — Your details &amp; AI-polished email</div>
+
+    <!-- 1. Issue-specific dynamic fields FIRST -->
+    <div id="issue-fields"></div>
+
+    <!-- 2. Complaint details -->
+    <label id="lbl-det">Additional details (optional)</label>
+    <textarea id="det" autocomplete="off" oninput="onDetInput()"></textarea>
+
+    <!-- zh tip -->
+    <div class="tip" id="zh-tip">💡 <strong>小貼士 Tip:</strong> 研究顯示，以英文提交的投訴往往獲得更快回應。我們的AI可將您的中文描述直接轉化為專業英文投訴信。<br/><span style="opacity:.8;font-size:12px">Complaints in English tend to get faster responses.</span></div>
+
+    <!-- 3. Draft language & tone -->
+    <div class="lang-toggle-row">
+      <div>
+        <div style="font-size:13px;font-weight:700;color:var(--blue);margin-bottom:.15rem" id="draft-lang-lbl">Draft language</div>
+        <div style="font-size:12px;color:var(--muted)" id="draft-lang-sub">English is recommended for faster response</div>
+      </div>
+      <div style="display:flex;gap:.4rem">
+        <button class="tone-btn on" id="dl-en" onclick="setDraftLang('en')">🇬🇧 English <span style="color:#e0a020;font-size:10px;font-weight:700">✓ Send</span></button>
+        <button class="tone-btn" id="dl-zh" onclick="setDraftLang('zh')">🇭🇰 繁中預覽</button>
+      </div>
+    </div>
+    <label id="lbl-tone">Tone</label>
+    <div class="tone-row">
+      <button class="tone-btn on" id="tb1" onclick="pickTone(this,'formal')">Formal</button>
+      <button class="tone-btn" id="tb2" onclick="pickTone(this,'firm')">Firm &amp; Assertive</button>
+      <button class="tone-btn" id="tb3" onclick="pickTone(this,'concise')">Concise</button>
+    </div>
+
+    <!-- 4. LETTER PREVIEW -->
+    <div class="ai-section">
+      <div class="ai-hdr"><span class="ai-badge">AI DRAFT</span><span id="ai-sub" style="font-size:12px;color:var(--muted)">Powered by RightlyHK · Editable</span></div>
+      <textarea class="ai-email-box" id="ai-email" style="display:none"></textarea>
+      <div id="ai-placeholder" style="color:var(--muted);font-size:13px;padding:.5rem 0">Answer the questions above to preview your complaint letter here.</div>
+      <div class="ai-load" id="ai-load" style="display:none"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span id="ai-loading-txt" style="margin-left:6px">Drafting...</span></div>
+    </div>
+
+    <!-- 5. CONTACT INFO (after preview) -->
+    <div style="border-top:2px solid var(--border);margin-top:1.25rem;padding-top:1.25rem">
+      <div style="font-size:14px;font-weight:700;color:var(--blue);margin-bottom:.75rem" id="contact-hdr">✉️ Your contact details — so we can send the letter and track replies</div>
+
+      <label id="lbl-name">Your name *</label>
+      <input type="text" id="fullname" autocomplete="off" oninput="checkS3()"/>
+
+      <label id="lbl-ue">Your email address *</label>
+      <input type="email" id="uemail" autocomplete="off" oninput="checkS3()" style="border-color:var(--blue-mid)"/>
+      <div style="font-size:12px;color:var(--blue);margin-top:-.5rem;margin-bottom:.75rem" id="ue-hint">Required — we will send you a copy and case updates.</div>
+
+      <label id="lbl-phone">Phone number (optional)</label>
+      <input type="tel" id="phone" maxlength="9" autocomplete="off" oninput="fmtPhone(this)"/>
+
+      <label id="lbl-ref">Reference number (optional)</label>
+      <input type="text" id="refnum" autocomplete="off"/>
+
+      <label id="lbl-contract">Contract start date (optional)</label>
+      <input type="text" id="contractdate" autocomplete="off"/>
+
+      <label id="lbl-plan">Service plan name (optional)</label>
+      <input type="text" id="planname" autocomplete="off"/>
+    </div>
+
+    <div class="wnav">
+      <button class="btn-back" id="bk3" onclick="goStep(2)">← Back</button>
+      <button class="btn-next" id="n3" onclick="goStep(4)" disabled>Review &amp; Send →</button>
+    </div>
+  </div>
+
+  <!-- S4: Review -->
+  <div class="wstep" id="s4">
+    <div class="step-label" id="s4lbl">Step 4 of 4 — Review &amp; Submit</div>
+    <div class="review-box">
+      <div><strong id="rvl1">Provider:</strong> <span id="rv-prov"></span></div>
+      <div><strong id="rvl2">Issue:</strong> <span id="rv-issue"></span></div>
+      <div><strong id="rvl3">Sending to:</strong> <span id="rv-to" style="color:var(--blue)"></span></div>
+      <div><strong id="rvl4">Tracked from:</strong> <span id="rv-from" style="color:var(--blue)"></span></div>
+      <div><strong id="rvl5">Your email:</strong> <span id="rv-ue"></span></div>
+    </div>
+    <label id="lbl-final">Final email (editable)</label>
+    <textarea id="final-email" style="min-height:220px;font-size:13px;line-height:1.7"></textarea>
+    <p id="lbl-fnote" style="font-size:12px;color:var(--muted);margin-bottom:.5rem">All provider replies to your Case ID address are tracked. Unresolved after 30 days? Escalate to OFCA.</p>
+    <div class="wnav"><button class="btn-back" id="bk4" onclick="goStep(3)">← Back</button><button class="btn-next" id="n4" onclick="doSubmit()">Send Complaint ✉️</button></div>
+  </div>
+
+  <!-- S5: Success -->
+  <div class="wstep" id="s5">
+    <div class="success">
+      <div class="success-icon">✅</div>
+      <div class="case-badge" id="case-badge">CAS-2026-00001</div>
+      <h3 id="suc-title" style="margin-bottom:.5rem">Complaint Sent!</h3>
+      <p style="font-size:13px;color:var(--muted);max-width:400px;margin:0 auto .75rem"><span id="suc-sent">Sent to</span> <strong id="s-to"></strong> <span id="suc-from">from</span> <strong id="s-from"></strong>. <span id="suc-keep">Keep your Case ID for all follow-ups.</span></p>
+      <p style="font-size:12px;color:var(--muted)"><span id="suc-esc">Unresolved after 30 days? Escalate to</span> <a href="https://www.ofca.gov.hk" style="color:var(--blue)">OFCA</a> <span id="suc-or">or the</span> <a href="https://www.consumer.org.hk" style="color:var(--blue)"><span id="suc-cc">Consumer Council</span></a>.</p>
+      <button class="btn-gold" id="n-reset" style="margin-top:1rem" onclick="resetWizard()">File Another Complaint</button>
+    </div>
+  </div>
+</div>
+</section>
+</main>
+<footer><strong>RightlyHK</strong> — <span id="footer-txt">A free consumer rights platform for Hong Kong telecommunications complaints.</span></footer>
+</div>
+
+<!-- BLOG LIST -->
+<div class="page" id="page-blog-list">
+<div style="background:var(--blue);color:#fff;padding:2.5rem 2rem">
+  <div style="max-width:860px;margin:0 auto">
+    <div style="font-size:12px;opacity:.7;margin-bottom:.4rem" id="bl-breadcrumb">Home › Guides</div>
+    <h1 id="bl-list-title" style="font-size:1.8rem;font-weight:700;margin-bottom:.4rem">Consumer Rights Guides</h1>
+    <p id="bl-list-sub" style="opacity:.8;font-size:14px">Know your rights. File smarter complaints.</p>
+  </div>
+</div>
+<main>
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:.75rem">
+    <div id="bl-count" style="font-size:13px;color:var(--muted)">6 guides available</div>
+    <div class="bl-row">
+      <button class="bl-btn on" id="bl-en" onclick="setBlogLang('en')">English</button>
+      <button class="bl-btn" id="bl-zh" onclick="setBlogLang('zh')">繁體中文</button>
+    </div>
+  </div>
+  <div class="blog-grid" id="blog-grid"></div>
+</main>
+<footer><strong>RightlyHK</strong> — <span id="footer-txt2">A free consumer rights platform.</span></footer>
+</div>
+
+<!-- BLOG POST -->
+<div class="page" id="page-blog-post">
+<div class="blog-hero" id="post-hero">
+  <div style="max-width:720px;margin:0 auto">
+    <div style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;opacity:.8;margin-bottom:.75rem" id="post-tag"></div>
+    <h1 id="post-title"></h1>
+    <div class="meta" id="post-meta"></div>
+  </div>
+</div>
+<main>
+  <div class="blog-breadcrumb">
+    <a onclick="goPage('home')" id="bc-home">Home</a> ›
+    <a onclick="goPage('blog-list')" id="bc-guides">Guides</a> ›
+    <span id="bc-post"></span>
+  </div>
+  <div class="blog-content" id="post-body"></div>
+  <div class="blog-cta-box">
+    <div>
+      <div style="font-weight:700;font-size:15px;margin-bottom:.3rem" id="cta-title">Ready to file your complaint?</div>
+      <p id="cta-sub">Use RightlyHK — free, no login, AI-powered email drafting.</p>
+    </div>
+    <button class="btn-gold" id="cta-btn" onclick="goPage('home');setTimeout(function(){document.getElementById('wizard-sec').scrollIntoView({behavior:'smooth'});},100)">File a Complaint →</button>
+  </div>
+  <div class="blog-nav-row" id="post-nav"></div>
+  <div style="margin-top:2.5rem">
+    <div style="font-size:16px;font-weight:700;color:var(--blue);margin-bottom:1rem;padding-bottom:.5rem;border-bottom:2px solid var(--border)" id="sb-title">More Guides</div>
+    <div class="blog-grid" id="sidebar-links"></div>
+  </div>
+</main>
+<footer><strong>RightlyHK</strong> — <span id="footer-txt3">A free consumer rights platform.</span></footer>
+</div>
+
+<!-- ADMIN -->
+<div class="page" id="page-admin">
+<nav style="background:#1a1a2e;position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:56px;color:#fff">
+  <div class="logo" onclick="goPage('home')">Rightly<span>HK</span> <span style="font-size:12px;opacity:.5;font-weight:400">Admin</span></div>
+  <a style="font-size:14px;opacity:.85;cursor:pointer" onclick="goPage('home')">← Public Site</a>
+</nav>
+<main>
+  <div style="font-size:1.2rem;font-weight:700;margin-bottom:.25rem">Admin Panel</div>
+  <div style="font-size:13px;color:var(--muted);margin-bottom:1.5rem">Manage, escalate and resolve complaints</div>
+  <div class="stats">
+    <div class="stat"><div class="stat-n">14</div><div class="stat-l">Total</div></div>
+    <div class="stat"><div class="stat-n" style="color:#856404">8</div><div class="stat-l">Open</div></div>
+    <div class="stat"><div class="stat-n" style="color:var(--red)">3</div><div class="stat-l">Escalated</div></div>
+    <div class="stat"><div class="stat-n" style="color:var(--green)">3</div><div class="stat-l">Resolved</div></div>
+  </div>
+  <div class="card">
+    <div class="atabs">
+      <button class="atab on" onclick="atab(this)">All</button>
+      <button class="atab" onclick="atab(this)">Open</button>
+      <button class="atab" onclick="atab(this)">Escalated</button>
+      <button class="atab" onclick="atab(this)">Resolved</button>
+    </div>
+    <table>
+      <tr><th>Case ID</th><th>Provider</th><th>Issue</th><th>Date</th><th>Status</th><th>Actions</th></tr>
+      <tr><td><strong>CAS-2026-00014</strong><br/><span style="font-size:11px;color:var(--muted)">cas-2026-00014@rightlyhk.com</span></td><td>HKT</td><td>Billing</td><td>04 Jun 2026</td><td><span class="badge b-open">Open</span></td><td><button class="act-btn act-esc" onclick="escalate(this)">Escalate</button><button class="act-btn" onclick="resolve(this)">Resolve</button></td></tr>
+      <tr><td><strong>CAS-2026-00013</strong><br/><span style="font-size:11px;color:var(--muted)">cas-2026-00013@rightlyhk.com</span></td><td>SmarTone</td><td>Poor Speed</td><td>03 Jun 2026</td><td><span class="badge b-esc">Escalated</span></td><td><button class="act-btn" onclick="resolve(this)">Resolve</button></td></tr>
+      <tr><td><strong>CAS-2026-00012</strong><br/><span style="font-size:11px;color:var(--muted)">cas-2026-00012@rightlyhk.com</span></td><td>3HK</td><td>Contract Dispute</td><td>02 Jun 2026</td><td><span class="badge b-res">Resolved</span></td><td><span style="font-size:12px;color:var(--muted)">Closed</span></td></tr>
+      <tr><td><strong>CAS-2026-00011</strong><br/><span style="font-size:11px;color:var(--muted)">cas-2026-00011@rightlyhk.com</span></td><td>China Mobile</td><td>Cancellation</td><td>01 Jun 2026</td><td><span class="badge b-open">Open</span></td><td><button class="act-btn act-esc" onclick="escalate(this)">Escalate</button><button class="act-btn" onclick="resolve(this)">Resolve</button></td></tr>
+      <tr><td><strong>CAS-2026-00010</strong><br/><span style="font-size:11px;color:var(--muted)">cas-2026-00010@rightlyhk.com</span></td><td>CSL</td><td>Service Outage</td><td>30 May 2026</td><td><span class="badge b-esc">Escalated</span></td><td><button class="act-btn" onclick="resolve(this)">Resolve</button></td></tr>
+    </table>
+  </div>
+</main>
+</div>
+
+<!-- LOGIN -->
+<div id="login-modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.55);z-index:300;align-items:center;justify-content:center">
+  <div style="background:#fff;border-radius:12px;padding:2rem;width:320px;box-shadow:0 8px 32px rgba(0,0,0,.2)">
+    <div style="text-align:center;margin-bottom:1.25rem">
+      <div style="font-size:2rem;margin-bottom:.25rem">🔒</div>
+      <div style="font-weight:700;font-size:16px;color:var(--blue)">Admin Login</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:.25rem">RightlyHK staff only</div>
+    </div>
+    <label style="font-size:13px;font-weight:600;color:#333;display:block;margin-bottom:.35rem">Password</label>
+    <input type="password" id="login-pw" placeholder="Enter password" style="width:100%;padding:.6rem .75rem;border:1px solid var(--border);border-radius:6px;font-size:14px;font-family:inherit;margin-bottom:.5rem;outline:none"/>
+    <div id="login-err" style="display:none;color:var(--red);font-size:12px;margin-bottom:.5rem">Incorrect password.</div>
+    <button onclick="doLogin()" style="width:100%;background:var(--blue);color:#fff;border:none;padding:.65rem;border-radius:6px;font-size:14px;font-weight:600;cursor:pointer;margin-bottom:.5rem">Login</button>
+    <button onclick="closeLogin()" style="width:100%;background:#fff;border:1px solid var(--border);color:var(--muted);padding:.55rem;border-radius:6px;font-size:13px;cursor:pointer">Cancel</button>
+  </div>
+</div>
+
+<button class="fab" id="fab" onclick="openLogin()">🔒 Admin</button>
+
+<script>
+var lang='en', blogLang='en', prov='', issue='', tone='formal', draftLang='en', caseN=14, currentPost=0;
+var ADMIN_PW='rightlyhk2026';
+var provEmails={'PCCW':'cs@pccw.com','HKT':'cs@hkt.com','HKBN':'cs@hkbn.net','HGC Global Communications':'cs@hgc.com.hk','China Mobile Hong Kong (Broadband)':'cs@chinamobilehk.com','Hong Kong Cable Television':'cs@hkcable.com.hk','WTT (HKBN Enterprise Solutions)':'cs@wtt.com','China Mobile Hong Kong (Mobile)':'cs@chinamobilehk.com','csl.':'cs@csl.com.hk','1010':'cs@1010.com.hk','3 Hong Kong':'cs@three.com.hk','SmarTone':'care@smartone.com'};
+
+function gv(id){var e=document.getElementById(id);return e?e.value.trim():'';}
+function ge(id){return document.getElementById(id);}
+
+// ── PAGE ROUTING ──
+function goPage(pg){
+  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('on');});
+  var el=ge('page-'+pg); if(el) el.classList.add('on');
+  window.scrollTo(0,0);
+  ge('fab').style.display=(pg==='admin')?'none':'block';
+  ge('main-nav').style.display=(pg==='admin')?'none':'flex';
+  if(pg==='blog-list') renderBlogList();
+}
+
+// ── WIZARD ──
+function goStep(n){
+  for(var i=1;i<=5;i++){var el=ge('s'+i);if(el)el.className='wstep'+(i===n?' on':'');}
+  for(var i=1;i<=4;i++){var el=ge('p'+i);if(el)el.className='prog-seg'+(i<n?' done':i===n?' active':'');}
+  if(n===3) renderIssueFields();
+  if(n===4) fillReview();
+}
+function pickProv(el,name){
+  document.querySelectorAll('.prov-btn').forEach(function(b){b.classList.remove('on');});
+  el.classList.add('on');
+  var cr=ge('custom-row');
+  if(name==='__custom__'){cr.style.display='block';prov='';ge('n1').disabled=true;}
+  else{cr.style.display='none';prov=name;ge('n1').disabled=false;}
+}
+function onCustomName(){prov=gv('custom-name');ge('n1').disabled=prov.length<2;}
+function pickIssue(el,name){
+  document.querySelectorAll('.issue-btn').forEach(function(b){b.classList.remove('on');});
+  el.classList.add('on');issue=name;ge('n2').disabled=false;
+}
+function fmtPhone(el){
+  var v=el.value.replace(/\D/g,'').substring(0,8);
+  if(v.length>4)v=v.substring(0,4)+' '+v.substring(4);
+  el.value=v;
+}
+function onDetInput(){
+  var v=gv('det');
+  var hasZH=/[\u4e00-\u9fff]/.test(v);
+  var tip=ge('zh-tip'); if(tip) tip.style.display=hasZH?'block':'none';
+  checkS3();
+}
+function checkS3(){
+  // draft can generate once the sub-issue is selected (structured data carries the substance)
+  var subEl=ge('if-sub');
+  var subOk=subEl?subEl.value!=='':false;
+  var det=gv('det');
+  var zhCount=(det.match(/[\u4e00-\u9fff]/g)||[]).length;
+  var detOk=zhCount>=3||det.length>=10;
+  if(subOk||detOk) generateDraft();
+  var emailOk=gv('uemail').indexOf('@')>0;
+  var nameOk=gv('fullname').length>=1;
+  ge('n3').disabled=!((subOk||detOk)&&emailOk&&nameOk);
+}
+function draftReady(){
+  var subEl=ge('if-sub');
+  var subOk=subEl?subEl.value!=='':false;
+  var det=gv('det');
+  var zhCount=(det.match(/[\u4e00-\u9fff]/g)||[]).length;
+  return subOk||zhCount>=3||det.length>=10;
+}
+function pickTone(el,t){
+  document.querySelectorAll('.tone-row .tone-btn').forEach(function(b){b.classList.remove('on');});
+  el.classList.add('on');tone=t;
+  if(draftReady()) generateDraft();
+}
+function setDraftLang(l){
+  draftLang=l;
+  ge('dl-en').className='tone-btn'+(l==='en'?' on':'');
+  ge('dl-zh').className='tone-btn'+(l==='zh'?' on':'');
+  if(draftReady()) generateDraft();
+}
+function getProvEmail(){
+  var ce=gv('custom-email');
+  return ce||provEmails[prov]||'complaints@'+prov.toLowerCase().replace(/\s+/g,'')+'.com';
+}
+function fillReview(){
+  var cid='CAS-2026-'+String(caseN+1).padStart(5,'0');
+  ge('rv-prov').textContent=prov;
+  ge('rv-issue').textContent=issueName(lang==='zh');
+  ge('rv-to').textContent=getProvEmail();
+  ge('rv-from').textContent=cid.toLowerCase()+'@rightlyhk.com';
+  ge('rv-ue').textContent=gv('uemail')||(lang==='zh'?'未提供':'Not provided');
+  ge('final-email').value=gv('ai-email');
+}
+function doSubmit(){
+  caseN++;
+  var cid='CAS-2026-'+String(caseN).padStart(5,'0');
+  ge('case-badge').textContent=cid;
+  ge('s-to').textContent=getProvEmail();
+  ge('s-from').textContent=cid.toLowerCase()+'@rightlyhk.com';
+  goStep(5);
+}
+function resetWizard(){
+  prov='';issue='';tone='formal';draftLang='en';
+  document.querySelectorAll('.prov-btn,.issue-btn').forEach(function(b){b.classList.remove('on');});
+  document.querySelectorAll('.tone-btn').forEach(function(b){b.classList.remove('on');});
+  ge('tb1').classList.add('on');ge('dl-en').classList.add('on');ge('dl-zh').classList.remove('on');
+  ['det','uemail','phone','fullname','refnum','contractdate','planname','custom-name','custom-email','ai-email','final-email'].forEach(function(id){var el=ge(id);if(el)el.value='';});
+  ge('custom-row').style.display='none';
+  ge('n1').disabled=true;ge('n2').disabled=true;ge('n3').disabled=true;
+  ge('ai-placeholder').style.display='block';
+  ge('ai-email').style.display='none';
+  ge('zh-tip').style.display='none';
+  goStep(1);
+}
+
+var issueZH={'Billing / Overcharge':'賬單／多收費用','Service Outage':'服務中斷','Contract Dispute':'合約糾紛','Poor Signal / Speed':'訊號差／網速慢','Porting / SIM Issue':'號碼攜帶／SIM問題','Customer Service':'客戶服務','Cancellation Problem':'取消服務問題','Other':'其他'};
+function issueName(useZH){return useZH?(issueZH[issue]||issue):issue;}
+
+// ── ISSUE-SPECIFIC FIELDS (Resolver-style: selectable, guided) ──
+// type:'select' = dropdown with pre-written bilingual options (accurate EN letter guaranteed)
+// type:'date' = native date picker
+// type:'text' = short free text
+var issueFields={
+  'Billing / Overcharge':[
+    {id:'if-sub',type:'select',en:'What best describes the problem?',zh:'哪項最符合您的問題？',opts:[
+      {en:'I was charged for a service I never ordered',zh:'被收取從未訂購的服務費用'},
+      {en:'I was charged more than my agreed plan price',zh:'收費高於協議的計劃價格'},
+      {en:'I was double-charged in the same billing period',zh:'同一帳單期內被重複收費'},
+      {en:'A promotional discount was not applied',zh:'優惠折扣未有兌現'},
+      {en:'I was charged after cancelling the service',zh:'取消服務後仍被收費'},
+      {en:'Roaming/data charges I did not authorise',zh:'未經授權的漫遊／數據收費'}]},
+    {id:'if-amount',type:'text',en:'Disputed amount (HK$)',zh:'爭議金額（港幣）'},
+    {id:'if-billdate',type:'date',en:'Date of the bill',zh:'帳單日期'},
+    {id:'if-contacted',type:'select',en:'Have you already contacted the provider?',zh:'您是否已聯絡電訊商？',opts:[
+      {en:'No, this is my first complaint',zh:'否，這是首次投訴'},
+      {en:'Yes — they refused a refund',zh:'是——他們拒絕退款'},
+      {en:'Yes — they promised to fix it but nothing happened',zh:'是——他們承諾處理但沒有下文'},
+      {en:'Yes — I could not reach anyone helpful',zh:'是——但無法找到能協助的人'}]}
+  ],
+  'Service Outage':[
+    {id:'if-sub',type:'select',en:'What type of service was affected?',zh:'哪類服務受影響？',opts:[
+      {en:'Home broadband completely down',zh:'家居寬頻完全中斷'},
+      {en:'Mobile data not working',zh:'流動數據無法使用'},
+      {en:'No mobile signal / cannot make calls',zh:'無訊號／無法通話'},
+      {en:'TV service interrupted',zh:'電視服務中斷'},
+      {en:'Intermittent disconnections',zh:'間歇性斷線'}]},
+    {id:'if-outagestart',type:'date',en:'When did the outage start?',zh:'服務中斷開始日期'},
+    {id:'if-outagedur',type:'select',en:'How long did it last?',zh:'持續了多久？',opts:[
+      {en:'A few hours',zh:'數小時'},
+      {en:'1–2 days',zh:'1至2天'},
+      {en:'3–7 days',zh:'3至7天'},
+      {en:'More than a week',zh:'超過一星期'},
+      {en:'Still ongoing',zh:'仍在中斷'}]},
+    {id:'if-outagearea',type:'text',en:'District / address affected',zh:'受影響地區／地址'}
+  ],
+  'Contract Dispute':[
+    {id:'if-sub',type:'select',en:'What is the dispute about?',zh:'爭議涉及什麼？',opts:[
+      {en:'Charged an early termination fee I believe is unfair',zh:'被收取不公平的提前終止費'},
+      {en:'Contract was renewed without my consent',zh:'合約在未經同意下被續期'},
+      {en:'Terms were changed after I signed',zh:'簽約後條款被更改'},
+      {en:'Verbal promises by salesperson not honoured',zh:'銷售員的口頭承諾未兌現'},
+      {en:'I was misled about what the contract included',zh:'合約內容與銷售時說明不符'}]},
+    {id:'if-contractterm',type:'text',en:'Contract length & monthly fee (e.g. 24 months, HK$298/month)',zh:'合約年期及月費（例如24個月，每月298港元）'},
+    {id:'if-signdate',type:'date',en:'When did you sign the contract?',zh:'簽約日期'}
+  ],
+  'Poor Signal / Speed':[
+    {id:'if-sub',type:'select',en:'What best describes the problem?',zh:'哪項最符合您的問題？',opts:[
+      {en:'Broadband speed far below advertised',zh:'寬頻速度遠低於宣傳'},
+      {en:'Mobile signal weak at home/office',zh:'家中／辦公室訊號微弱'},
+      {en:'Frequent buffering / lag during peak hours',zh:'繁忙時段經常緩慢／延遲'},
+      {en:'5G not available despite 5G plan',zh:'購買5G計劃但無5G服務'}]},
+    {id:'if-speedpromised',type:'text',en:'Advertised speed (e.g. 1000Mbps)',zh:'宣傳網速（例如1000Mbps）'},
+    {id:'if-speedactual',type:'text',en:'Actual speed from speedtest.ofca.gov.hk',zh:'實際網速（用speedtest.ofca.gov.hk測試）'},
+    {id:'if-speedsince',type:'date',en:'When did the problem start?',zh:'問題開始日期'}
+  ],
+  'Porting / SIM Issue':[
+    {id:'if-sub',type:'select',en:'What best describes the problem?',zh:'哪項最符合您的問題？',opts:[
+      {en:'Number port is delayed beyond 1 working day',zh:'號碼攜帶延誤超過1個工作天'},
+      {en:'Port was rejected without valid reason',zh:'攜帶申請被無理拒絕'},
+      {en:'Old provider is blocking the transfer',zh:'原電訊商阻撓轉台'},
+      {en:'SIM card not activated / not working',zh:'SIM卡未啟用／無法使用'},
+      {en:'Lost my number during the port',zh:'攜帶過程中失去號碼'}]},
+    {id:'if-portdate',type:'date',en:'When did you request the port?',zh:'申請攜帶日期'},
+    {id:'if-portnumber',type:'text',en:'Number being ported',zh:'攜帶的電話號碼'}
+  ],
+  'Customer Service':[
+    {id:'if-sub',type:'select',en:'What went wrong?',zh:'發生了什麼問題？',opts:[
+      {en:'Staff was rude or unprofessional',zh:'職員態度惡劣或不專業'},
+      {en:'Given wrong or conflicting information',zh:'獲提供錯誤或矛盾的資訊'},
+      {en:'Promised callback never happened',zh:'承諾回電但從未回覆'},
+      {en:'Transferred repeatedly, nobody took ownership',zh:'被不斷轉接，無人跟進'},
+      {en:'Extremely long wait times',zh:'等候時間極長'},
+      {en:'Complaint was ignored or dismissed',zh:'投訴被忽視或敷衍'}]},
+    {id:'if-csdate',type:'date',en:'When did this happen?',zh:'發生日期'},
+    {id:'if-cswhere',type:'select',en:'Where did it happen?',zh:'在哪裡發生？',opts:[
+      {en:'Customer service hotline',zh:'客戶服務熱線'},
+      {en:'Physical store',zh:'門市'},
+      {en:'Online chat',zh:'網上客服'},
+      {en:'Email correspondence',zh:'電郵往來'},
+      {en:'Social media',zh:'社交媒體'}]},
+    {id:'if-csagent',type:'text',en:'Staff name or ID (if known)',zh:'職員姓名或編號（如知道）'}
+  ],
+  'Cancellation Problem':[
+    {id:'if-sub',type:'select',en:'What best describes the problem?',zh:'哪項最符合您的問題？',opts:[
+      {en:'They refuse to process my cancellation',zh:'拒絕處理我的取消申請'},
+      {en:'Still being charged after cancellation',zh:'取消後仍被收費'},
+      {en:'Made to jump through hoops to cancel (retention tactics)',zh:'被諸多留難阻止取消（挽留手法）'},
+      {en:'Cancellation confirmed but service/billing continues',zh:'已確認取消但服務／收費仍繼續'}]},
+    {id:'if-canceldate',type:'date',en:'When did you request cancellation?',zh:'要求取消日期'},
+    {id:'if-cancelhow',type:'select',en:'How did you request it?',zh:'透過什麼方式要求？',opts:[
+      {en:'Phone hotline',zh:'電話熱線'},
+      {en:'In store',zh:'門市'},
+      {en:'Email / written notice',zh:'電郵／書面通知'},
+      {en:'Online account portal',zh:'網上帳戶系統'}]}
+  ],
+  'Other':[
+    {id:'if-otherdate',type:'date',en:'When did the issue occur?',zh:'問題發生日期'}
+  ]
+};
+
+function renderIssueFields(){
+  var container=ge('issue-fields');
+  if(!container) return;
+  var fields=issueFields[issue]||[];
+  if(fields.length===0){container.innerHTML='';return;}
+  // preserve existing values before re-render
+  var saved={};
+  fields.forEach(function(f){var el=ge(f.id);if(el)saved[f.id]=el.value;});
+  var isZH=lang==='zh';
+  var header='<div style="background:#eaf4fb;border-radius:8px 8px 0 0;padding:.6rem 1rem;font-size:13px;font-weight:700;color:var(--blue)">'+(isZH?'📋 關於「'+issueName(true)+'」— 請選擇最符合的情況':'📋 About "'+issue+'" — select what best matches your situation')+'</div>';
+  var inputs=fields.map(function(f){
+    var lbl='<label style="margin-top:.6rem">'+(isZH?f.zh:f.en)+'</label>';
+    if(f.type==='select'){
+      var opts='<option value="">'+(isZH?'— 請選擇 —':'— Please select —')+'</option>';
+      f.opts.forEach(function(o,oi){opts+='<option value="'+oi+'">'+(isZH?o.zh:o.en)+'</option>';});
+      return lbl+'<select id="'+f.id+'" onchange="checkS3()" style="width:100%;padding:.6rem .75rem;border:1px solid var(--border);border-radius:6px;font-size:14px;font-family:inherit;background:#fff;margin-bottom:.5rem">'+opts+'</select>';
+    }
+    if(f.type==='date'){
+      return lbl+'<input type="date" id="'+f.id+'" onchange="checkS3()" style="width:100%;padding:.55rem .75rem;border:1px solid var(--border);border-radius:6px;font-size:14px;font-family:inherit;background:#fff;margin-bottom:.5rem"/>';
+    }
+    return lbl+'<input type="text" id="'+f.id+'" autocomplete="off" oninput="checkS3()"/>';
+  }).join('');
+  container.innerHTML=header+'<div style="background:#f8fbfe;border:1px solid #b8d4f0;border-top:none;border-radius:0 0 8px 8px;padding:.75rem 1rem;margin-bottom:.75rem">'+inputs+'</div>';
+  // restore values
+  fields.forEach(function(f){var el=ge(f.id);if(el&&saved[f.id]!==undefined)el.value=saved[f.id];});
+}
+
+function getIssueAnswers(){
+  var fields=issueFields[issue]||[];
+  var isZH=draftLang==='zh';
+  var out='';
+  fields.forEach(function(f){
+    var el=ge(f.id); if(!el) return;
+    var v=el.value; if(!v) return;
+    var lbl=isZH?f.zh:f.en;
+    if(f.type==='select'){
+      var o=f.opts[parseInt(v,10)];
+      if(o) out+=lbl+': '+(isZH?o.zh:o.en)+'\n';
+    } else if(f.type==='date'){
+      var d=new Date(v+'T00:00:00');
+      var ds=isNaN(d)?v:d.toLocaleDateString(isZH?'zh-HK':'en-GB',{year:'numeric',month:'long',day:'numeric'});
+      out+=lbl+': '+ds+'\n';
+    } else {
+      out+=lbl+': '+v+'\n';
+    }
+  });
+  return out;
+}
+function generateDraft(){
+  var ph=ge('ai-placeholder'); if(ph) ph.style.display='none';
+  var box=ge('ai-email'); if(!box) return;
+  box.value=buildDraft();
+  box.style.display='block';
+  // reminder when previewing in Chinese
+  var rem=ge('zh-preview-note');
+  if(!rem){
+    rem=document.createElement('div');
+    rem.id='zh-preview-note';
+    rem.style.cssText='background:#fffbea;border-left:4px solid #f0b429;border-radius:0 6px 6px 0;padding:.6rem .9rem;font-size:12px;color:#7a5c00;margin-top:.5rem;line-height:1.6;display:none';
+    box.parentNode.insertBefore(rem,box.nextSibling);
+  }
+  if(draftLang==='zh'){
+    rem.innerHTML='💡 這是中文預覽，方便您理解信件內容。<strong>建議發送前切換回英文版本</strong>，英文投訴信通常獲得更快回應。';
+    rem.style.display='block';
+  } else {
+    rem.style.display='none';
+  }
+}
+function regenerate(){generateDraft();}
+
+function buildDraft(){
+  var det=gv('det');
+  var name=gv('fullname');
+  var phone=gv('phone');
+  var ref=gv('refnum');
+  var contract=gv('contractdate');
+  var plan=gv('planname');
+  var isZH=draftLang==='zh';
+  var date=new Date().toLocaleDateString(isZH?'zh-HK':'en-GB',{year:'numeric',month:'long',day:'numeric'});
+  var remedies={'Billing / Overcharge':{en:'I request an immediate refund of the overcharged amount and a written explanation.',zh:'要求立即退回多收款項，並提供書面解釋。'},'Service Outage':{en:'I request a bill credit for the full period of service disruption.',zh:'要求就服務中斷期間提供相應的費用減免。'},'Contract Dispute':{en:'I request an immediate review of the contract terms and resolution without penalty.',zh:'要求立即重新審視合約條款，並在不收取任何費用的情況下解決此爭議。'},'Poor Signal / Speed':{en:'I request immediate improvement of service quality or a proportionate bill credit.',zh:'要求立即改善服務質素，或提供相應的費用減免。'},'Porting / SIM Issue':{en:'I request immediate completion of the number port per the Mobile Number Portability Code.',zh:'要求立即按照《流動電話號碼可攜性守則》完成號碼攜帶手續。'},'Customer Service':{en:'I request a formal written apology and follow-up from senior management.',zh:'要求正式書面道歉，並由高級管理人員跟進此事。'},'Cancellation Problem':{en:'I request immediate service cancellation with written confirmation of no further charges.',zh:'要求立即取消服務，並以書面確認不會收取任何額外費用。'},'Other':{en:'I request a written response and resolution within 10 business days.',zh:'要求在10個工作天內提供書面回覆及解決方案。'}};
+  var rem=(remedies[issue]||remedies['Other']);
+  var ofca=isZH?'如貴公司未能在30天內妥善解決此投訴，本人保留向通訊事務管理局辦公室（OFCA）提出正式投訴的權利，此乃根據《電訊條例》（第106章）所賦予本人的合法權利。':'Should this complaint remain unresolved within 30 days, I reserve the right to escalate to the Office of the Communications Authority (OFCA) under the Telecommunications Ordinance (Cap. 106).';
+  var info='';
+  if(ref) info+=(isZH?'參考編號：':'Reference No: ')+ref+'\n';
+  if(contract) info+=(isZH?'合約開始日期：':'Contract Start: ')+contract+'\n';
+  if(plan) info+=(isZH?'服務計劃：':'Plan: ')+plan+'\n';
+  if(phone) info+=(isZH?'聯絡電話：':'Phone: ')+phone+'\n';
+  var issueAns=getIssueAnswers();
+  if(issueAns) info+=issueAns;
+  if(isZH){
+    var open=tone==='firm'?'本人以強烈保留意見就以下事項提出正式投訴，要求即時處理。':tone==='concise'?'茲就以下事項提出正式投訴。':'本人謹此就以下事項向貴公司提出正式投訴，懇請妥善處理。';
+    return '敬啟者，\n\n'+open+'\n\n投訴事項：'+issueName(true)+'\n'+(info?info+'\n':'')+(det?'補充說明：\n'+det+'\n\n':'')+rem.zh+'\n\n'+ofca+'\n\n煩請於收到本函後確認收訖，並提供案件參考編號。\n\n此致\n'+prov+' 客戶服務部\n\n'+(name||'[閣下姓名]')+'\n'+(phone?'電話：'+phone+'\n':'')+'日期：'+date;
+  } else {
+    var detHasZH=/[\u4e00-\u9fff]/.test(det);
+    var detBlock='';
+    if(det){
+      detBlock=detHasZH
+        ?'Additional details (customer\'s own words, in Chinese):\n'+det
+        :'Additional details:\n'+det;
+    }
+    var open=tone==='firm'?'I am writing to formally demand immediate action regarding the matter below.':tone==='concise'?'I am writing to formally complain about the following issue.':'I am writing to formally lodge a complaint and request your urgent attention to the following matter.';
+    var body='Issue: '+issue+'\n'+(info?info+'\n':'')+(detBlock?detBlock:'');
+    var close=tone==='firm'?'I expect a response within 10 business days. Failure to respond will result in escalation to OFCA and the Consumer Council.':rem.en;
+    return 'Dear '+prov+' Customer Relations Team,\n\n'+open+'\n\n'+body+'\n\n'+close+'\n\n'+ofca+'\n\nPlease acknowledge receipt and provide a reference number.\n\nYours faithfully,\n'+(name||'[Your Name]')+'\n'+(phone?'Tel: '+phone+'\n':'')+'Date: '+date;
+  }
+}
+
+function makeStronger(){
+  var box=ge('ai-email'); if(!box) return;
+  var isZH=/[\u4e00-\u9fff]/.test(box.value);
+  var add=isZH?'\n\n請注意，若貴公司未能在30天內妥善解決此事，本人將根據《電訊條例》（第106章）向OFCA及消費者委員會提出正式投訴，並保留一切法律追索權。':'\n\nPlease be advised that failure to resolve this matter within 30 days will result in a formal complaint to OFCA under the Telecommunications Ordinance (Cap. 106), as well as to the Consumer Council of Hong Kong.';
+  if(box.value.indexOf('OFCA')<0&&box.value.indexOf('通訊事務管理局')<0){box.value+=add;}
+  else{if(isZH)box.value=box.value.replace('本人謹此','本人以強烈保留意見');else box.value=box.value.replace('I am writing to formally lodge','I am writing to formally demand immediate resolution of');}
+}
+function switchToZH(){var prev=draftLang;draftLang='zh';var box=ge('ai-email');if(box)box.value=buildDraft();draftLang=prev;}
+function addRef(){
+  var ref=gv('refnum'); var box=ge('ai-email');
+  if(!box||!ref) return;
+  var isZH=/[\u4e00-\u9fff]/.test(box.value);
+  if(isZH&&box.value.indexOf('參考編號')<0) box.value=box.value.replace('事件詳情','參考編號：'+ref+'\n事件詳情');
+  else if(!isZH&&box.value.indexOf('Reference')<0) box.value=box.value.replace('Details:','Reference No: '+ref+'\nDetails:');
+}
+
+// ── ADMIN ──
+function openLogin(){var m=ge('login-modal');m.style.display='flex';ge('login-pw').value='';ge('login-err').style.display='none';setTimeout(function(){ge('login-pw').focus();},100);}
+function closeLogin(){ge('login-modal').style.display='none';}
+function doLogin(){if(ge('login-pw').value===ADMIN_PW){closeLogin();goPage('admin');}else{ge('login-err').style.display='block';ge('login-pw').value='';ge('login-pw').focus();}}
+ge('login-pw').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin();});
+function atab(el){document.querySelectorAll('.atab').forEach(function(t){t.classList.remove('on');});el.classList.add('on');}
+function escalate(btn){btn.closest('td').previousElementSibling.innerHTML='<span class="badge b-esc">Escalated</span>';btn.remove();}
+function resolve(btn){btn.closest('td').previousElementSibling.innerHTML='<span class="badge b-res">Resolved</span>';btn.closest('td').innerHTML='<span style="font-size:12px;color:var(--muted)">Closed</span>';}
+
+// ── LANG ──
+var T={
+  en:{'nav-complaint':'File Complaint','nav-guides':'Guides','lang-btn':'繁中','h-title':'Your Rights. Your Voice. Resolved.','h-sub':"Hong Kong's free telecom complaints platform — AI drafts your professional complaint letter in minutes, with every reply tracked by email.",'hero-cta1':'Start My Complaint','hero-cta2':'Read Guides','hw1h':'Pick Provider','hw1p':'Select your telecom company','hw2h':'Choose Issue','hw2p':'Tell us what went wrong','hw3h':'Add Details & Polish','hw3p':'Describe & AI-polish','hw4h':'Review & Send','hw4p':'Confirm and submit','wiz-title':'📋 File a Complaint — No Login Required','s1lbl':'Step 1 of 4 — Select your telecom provider','lbl-fixed':'Fixed Line / Broadband','lbl-mobile':'Mobile','lbl-custom-btn':'Company not listed? Enter manually','lbl-cn':'Company name *','lbl-ce':'Company complaint email (optional)','n1':'Next →','s2lbl':'Step 2 of 4 — What is the issue?','ib1':'💳 Billing / Overcharge','ib2':'📡 Service Outage','ib3':'📄 Contract Dispute','ib4':'📶 Poor Signal / Speed','ib5':'📱 Porting / SIM Issue','ib6':'🎧 Customer Service','ib7':'❌ Cancellation Problem','ib8':'❓ Other','bk2':'← Back','n2':'Next →','s3lbl':'Step 3 of 4 — Your details & AI-polished email','lbl-name':'Your name *','lbl-phone':'Phone number (optional)','lbl-ref':'Reference number (optional)','lbl-contract':'Contract start date (optional)','lbl-plan':'Service plan name (optional)','lbl-ue':'Your email address *','ue-hint':'Required — we will send you a copy and case updates.','lbl-det':'Additional details (optional)','det-ph':'Anything else you want to add? The questions above already cover the key facts.','contact-hdr':'✉️ Your contact details — so we can send the letter and track replies','draft-lang-lbl':'Letter language','draft-lang-sub':'We recommend sending in English for faster response — you can switch to 繁中 anytime to preview and understand the letter, then switch back before sending.','lbl-tone':'Tone','tb1':'Formal','tb2':'Firm & Assertive','tb3':'Concise','ai-sub':'Powered by RightlyHK · Editable','ai-loading-txt':'Drafting...','ai-r':'↻ Redraft','ai-s':'💪 Stronger','ai-rf':'📋 Add ref.','ai-zh':'🌐 繁中','bk3':'← Back','n3':'Review & Send →','s4lbl':'Step 4 of 4 — Review & Submit','rvl1':'Provider:','rvl2':'Issue:','rvl3':'Sending to:','rvl4':'Tracked from:','rvl5':'Your email:','lbl-final':'Final email (editable)','lbl-fnote':'All provider replies to your Case ID address are tracked. Unresolved after 30 days? Escalate to OFCA.','bk4':'← Back','n4':'Send Complaint ✉️','suc-title':'Complaint Sent!','suc-sent':'Sent to','suc-from':'from','suc-keep':'Keep your Case ID for all follow-ups.','suc-esc':'Unresolved after 30 days? Escalate to','suc-or':'or the','suc-cc':'Consumer Council','n-reset':'File Another Complaint','footer-txt':'A free consumer rights platform for Hong Kong telecommunications complaints. Not affiliated with OFCA or any telecom provider.','fab':'🔒 Admin','bl-list-title':'Consumer Rights Guides','bl-list-sub':'Know your rights. File smarter complaints.','bl-breadcrumb':'Home › Guides','bl-count':'6 guides available','bc-home':'Home','bc-guides':'Guides','cta-title':'Ready to file your complaint?','cta-sub':'Use RightlyHK — free, no login, AI-powered email drafting.','cta-btn':'File a Complaint →','sb-title':'More Guides','blog-prev':'← Previous','blog-next':'Next →'},
+  zh:{'nav-complaint':'提交投訴','nav-guides':'消費者指南','lang-btn':'EN','h-title':'您的權益，您的聲音，一步解決。','h-sub':'香港免費電訊投訴平台——AI數分鐘內代筆專業投訴信，電郵全程追蹤。','hero-cta1':'立即提交投訴','hero-cta2':'閱讀指南','hw1h':'選擇電訊商','hw1p':'選擇您的電訊公司','hw2h':'選擇問題','hw2p':'告訴我們出了什麼問題','hw3h':'填寫詳情及潤色','hw3p':'描述及AI潤色','hw4h':'審閱並發送','hw4p':'確認並提交','wiz-title':'📋 提交投訴——無需登記','s1lbl':'第1步（共4步）——選擇您的電訊商','lbl-fixed':'固網／寬頻','lbl-mobile':'流動電話','lbl-custom-btn':'找不到您的電訊商？手動輸入','lbl-cn':'公司名稱 *','lbl-ce':'公司投訴電郵（選填）','n1':'下一步 →','s2lbl':'第2步（共4步）——選擇投訴問題','ib1':'💳 賬單／多收費用','ib2':'📡 服務中斷','ib3':'📄 合約糾紛','ib4':'📶 訊號差／網速慢','ib5':'📱 號碼攜帶／SIM問題','ib6':'🎧 客戶服務','ib7':'❌ 取消服務問題','ib8':'❓ 其他','bk2':'← 返回','n2':'下一步 →','s3lbl':'第3步（共4步）——填寫詳情及AI潤色電郵','lbl-name':'您的姓名 *','lbl-phone':'電話號碼（選填）','lbl-ref':'參考編號（選填）','lbl-contract':'合約開始日期（選填）','lbl-plan':'服務計劃名稱（選填）','lbl-ue':'您的電郵地址 *','ue-hint':'必填——我們將向您發送副本及案件更新。','lbl-det':'補充說明（選填）','det-ph':'還有其他想補充嗎？上面的問題已涵蓋主要事實。','contact-hdr':'✉️ 您的聯絡資料——用於發送信件及追蹤回覆','draft-lang-lbl':'信件語言','draft-lang-sub':'建議以英文發送以獲得更快回應——您可隨時切換至繁中預覽及理解信件內容，發送前再切換回英文。','lbl-tone':'語氣','tb1':'正式','tb2':'強硬果斷','tb3':'簡潔','ai-sub':'由RightlyHK提供支援 · 可編輯','ai-loading-txt':'正在起草……','ai-r':'↻ 重新起草','ai-s':'💪 加強語氣','ai-rf':'📋 加入參考編號','ai-zh':'🌐 繁中','bk3':'← 返回','n3':'審閱並發送 →','s4lbl':'第4步（共4步）——審閱並提交','rvl1':'電訊商：','rvl2':'問題：','rvl3':'發送至：','rvl4':'追蹤地址：','rvl5':'您的電郵：','lbl-final':'最終電郵（可編輯）','lbl-fnote':'所有電訊商回覆至您的案件編號地址均會被追蹤。30天後仍未解決？可向OFCA上報。','bk4':'← 返回','n4':'發送投訴 ✉️','suc-title':'投訴已發送！','suc-sent':'已發送至','suc-from':'發件地址','suc-keep':'請保留您的案件編號以便跟進。','suc-esc':'30天後仍未解決？可向','suc-or':'或','suc-cc':'消費者委員會','n-reset':'再提交一個投訴','footer-txt':'香港電訊投訴免費消費者權益平台。與OFCA或任何電訊商無關聯。','fab':'🔒 管理員','bl-list-title':'消費者權益指南','bl-list-sub':'了解您的權利，提交更有力的投訴。','bl-breadcrumb':'主頁 › 指南','bl-count':'共6篇指南','bc-home':'主頁','bc-guides':'指南','cta-title':'準備好提交投訴了嗎？','cta-sub':'使用RightlyHK——免費、無需登記、AI輔助起草電郵。','cta-btn':'立即提交投訴 →','sb-title':'更多指南','blog-prev':'← 上一篇','blog-next':'下一篇 →'}
+};
+
+function toggleLang(){lang=lang==='en'?'zh':'en';blogLang=lang;ge('bl-en').className='bl-btn'+(lang==='en'?' on':'');ge('bl-zh').className='bl-btn'+(lang==='zh'?' on':'');applyLang();}
+function applyLang(){
+  var L=T[lang];
+  var ids=['nav-complaint','nav-guides','lang-btn','h-title','h-sub','hero-cta1','hero-cta2','hw1h','hw1p','hw2h','hw2p','hw3h','hw3p','hw4h','hw4p','wiz-title','s1lbl','lbl-fixed','lbl-mobile','lbl-custom-btn','lbl-cn','lbl-ce','n1','s2lbl','ib1','ib2','ib3','ib4','ib5','ib6','ib7','ib8','bk2','n2','s3lbl','lbl-name','lbl-phone','lbl-ref','lbl-contract','lbl-plan','lbl-ue','ue-hint','lbl-det','draft-lang-lbl','draft-lang-sub','lbl-tone','tb1','tb2','tb3','ai-sub','ai-loading-txt','ai-r','ai-s','ai-rf','ai-zh','bk3','n3','s4lbl','rvl1','rvl2','rvl3','rvl4','rvl5','lbl-final','lbl-fnote','bk4','n4','suc-title','suc-sent','suc-from','suc-keep','suc-esc','suc-or','suc-cc','n-reset','footer-txt','fab','contact-hdr','bl-list-title','bl-list-sub','bl-breadcrumb','bl-count','bc-home','bc-guides','cta-title','cta-sub','cta-btn','sb-title'];
+  ids.forEach(function(id){var el=ge(id);if(el&&L[id]!==undefined)el.textContent=L[id];});
+  var phs={'det':'det-ph','uemail':'uemail-ph'};
+  var el=ge('det');if(el)el.placeholder=L['det-ph']||'';
+  renderIssueFields();
+  if(ge('page-blog-list').classList.contains('on'))renderBlogList();
+  if(ge('page-blog-post').classList.contains('on'))openPost(currentPost);
+}
+
+// ── BLOG ──
+var posts=[
+  {tag:{en:'BILLING',zh:'賬單'},en:{title:'How to dispute an unexpected charge on your telecom bill',summary:'Know your rights when a provider adds unauthorised charges to your bill.',meta:'5 min read · Billing',body:'<p>Discovering an unexpected charge on your telecom bill is frustrating — but you have clear rights under Hong Kong law to dispute it.</p><h3>Step 1: Identify the charge</h3><p>Check your bill carefully. Providers are required under the <strong>Telecommunications Ordinance (Cap. 106)</strong> to provide itemised billing upon request.</p><h3>Step 2: Raise a formal written complaint</h3><p>Send a written complaint via email or the provider\'s official complaints channel. This creates a paper trail.</p><h3>Step 3: Know the timeline</h3><p>Under OFCA guidelines, providers must acknowledge within <strong>5 working days</strong> and resolve within <strong>30 days</strong>.</p><h3>Step 4: Escalate to OFCA if needed</h3><p>If the provider refuses or does not respond within 30 days, file a complaint with OFCA at ofca.gov.hk.</p><div class="blog-tip">💡 Use RightlyHK to draft and send your complaint email in minutes.</div>'},zh:{title:'如何對抗電訊帳單上的不明收費',summary:'了解您在OFCA法規下的權利，當電訊商在您的月結單中加入未經授權的收費時應如何處理。',meta:'5分鐘閱讀 · 賬單',body:'<p>發現電訊帳單上出現不明收費令人沮喪——但根據香港法律，您有明確的權利提出異議。</p><h3>第一步：識別收費項目</h3><p>根據《電訊條例》（第106章），電訊商必須在要求下提供詳細帳單。</p><h3>第二步：提出正式書面投訴</h3><p>透過電郵或官方投訴渠道提交書面投訴，建立書面記錄。</p><h3>第三步：了解處理時限</h3><p>電訊商必須在<strong>5個工作天</strong>內確認，並在<strong>30天</strong>內解決問題。</p><h3>第四步：必要時向OFCA上報</h3><p>如30天內未有回應，請向OFCA（ofca.gov.hk）提交投訴。</p><div class="blog-tip">💡 使用RightlyHK在數分鐘內起草並發送您的投訴電郵。</div>'}},
+  {tag:{en:'CONTRACTS',zh:'合約'},en:{title:'Early termination fees: what providers can and cannot charge',summary:"A breakdown of Hong Kong's rules on contract lock-in periods.",meta:'7 min read · Contracts',body:'<p>Trapped in a contract you want to leave? Hong Kong has specific rules about what providers can charge when you exit early.</p><h3>What the law says</h3><p>ETFs must be proportionate and clearly disclosed at signing under the Consumer Council\'s Code of Practice and OFCA guidelines.</p><h3>When you may NOT have to pay</h3><ul><li>Provider changed contract terms without your consent</li><li>Service quality was consistently below the agreed standard</li><li>ETF was not clearly disclosed before signing</li><li>You are moving where the service is unavailable</li></ul><h3>How to dispute an ETF</h3><p>Write to the provider with your specific reason and evidence. If refused, escalate to OFCA.</p><div class="blog-tip">💡 Always get verbal promises in writing before signing.</div>'},zh:{title:'提前終止合約費用：電訊商可以及不可以收取的費用',summary:'詳解香港關於合約鎖定期的規定。',meta:'7分鐘閱讀 · 合約',body:'<p>被困在一份您想離開的合約中？香港對電訊商在您提前退出時可以收取的費用有具體規定。</p><h3>法律規定</h3><p>提前終止費必須合乎比例，並在簽約時清楚披露。</p><h3>您可能無需支付的情況</h3><ul><li>電訊商未經您同意更改合約條款</li><li>服務質量持續低於協議標準</li><li>簽約前未清楚披露提前終止費</li><li>您遷往服務無法覆蓋的地址</li></ul><h3>如何對提前終止費提出異議</h3><p>致函電訊商，列明原因並附上證據。如被拒絕，請向OFCA上報。</p><div class="blog-tip">💡 簽約前務必將所有口頭承諾以書面形式記錄。</div>'}},
+  {tag:{en:'SERVICE QUALITY',zh:'服務質素'},en:{title:'Your rights when broadband speeds fall below what was promised',summary:'Providers must deliver advertised speeds. Learn what remedies are available.',meta:'6 min read · Service Quality',body:'<p>You signed up for 1000Mbps but are getting 50Mbps. You have rights — and tools to enforce them.</p><h3>Understand "up to" speeds</h3><p>OFCA\'s Broadband Performance Test (speedtest.ofca.gov.hk) measures real-world performance. Consistently under 70–80% of advertised speed is grounds for complaint.</p><h3>How to document your case</h3><ul><li>Run speed tests 3× daily for 7 days using OFCA\'s official tool</li><li>Test via wired connection, not Wi-Fi</li><li>Screenshot every result with date and time</li></ul><h3>What remedies can you claim?</h3><p>Bill credit, partial refund, or early contract exit without penalty.</p><div class="blog-tip">💡 OFCA\'s speed test tool gives your complaint far more weight than a third-party tool.</div>'},zh:{title:'當寬頻速度低於承諾標準時您的權利',summary:'電訊商必須提供所宣傳的網速。了解可獲得的補救措施。',meta:'6分鐘閱讀 · 服務質素',body:'<p>您申請了1000Mbps但只獲得50Mbps？您有權利，也有工具來維護它。</p><h3>了解「高達」速度</h3><p>OFCA的寬頻網絡表現測試（speedtest.ofca.gov.hk）可測量實際網速。若持續低於70-80%，您有理由提出投訴。</p><h3>如何記錄您的案例</h3><ul><li>連續7天，每天至少3次速度測試</li><li>透過有線連接測試</li><li>截圖並保存每次結果</li></ul><h3>補救措施</h3><p>帳單抵扣、部分退款，或免罰提前終止合約。</p><div class="blog-tip">💡 OFCA的速度測試工具比第三方工具更具說服力。</div>'}},
+  {tag:{en:'ESCALATION',zh:'上報'},en:{title:'When and how to escalate to OFCA: a step-by-step guide',summary:'If your complaint is unresolved after 30 days, escalate to OFCA.',meta:'4 min read · Escalation',body:'<p>Escalating to OFCA is one of the most powerful tools available to Hong Kong telecom consumers.</p><h3>When can you escalate?</h3><ul><li>Provider has not resolved within <strong>30 days</strong></li><li>You received an unsatisfactory final response</li><li>The provider has not responded at all</li></ul><h3>How to file with OFCA</h3><ol><li>Go to ofca.gov.hk → Complaints</li><li>Complete the online complaint form</li><li>Attach all correspondence including your RightlyHK Case ID emails</li><li>State clearly what resolution you are seeking</li></ol><h3>Other escalation bodies</h3><p><strong>Consumer Council</strong> (consumer.org.hk) · <strong>Small Claims Tribunal</strong> for disputes under HK$75,000</p><div class="blog-tip">💡 Your RightlyHK Case ID email trail is perfect evidence for OFCA.</div>'},zh:{title:'何時及如何向OFCA上報：逐步指南',summary:'若您的投訴在30天後仍未解決，您有權向OFCA上報。',meta:'4分鐘閱讀 · 上報',body:'<p>向OFCA上報是香港電訊消費者最有力的工具之一。</p><h3>何時可以上報？</h3><ul><li>電訊商未能在<strong>30天</strong>內解決</li><li>您收到了不令人滿意的最終回覆</li><li>電訊商完全沒有回應</li></ul><h3>如何向OFCA提交投訴</h3><ol><li>前往ofca.gov.hk → 投訴</li><li>填寫網上投訴表格</li><li>附上所有往來文件</li><li>清楚說明所尋求的解決方案</li></ol><h3>其他上報機構</h3><p><strong>消費者委員會</strong>（consumer.org.hk）· <strong>小額錢債審裁處</strong></p><div class="blog-tip">💡 您的RightlyHK案件編號電郵記錄是向OFCA提供的完美證據。</div>'}},
+  {tag:{en:'SIM & PORTING',zh:'號碼攜帶'},en:{title:'SIM card porting: your rights when switching providers',summary:'Switching providers should be simple. Know the rules if your port is delayed.',meta:'5 min read · SIM & Porting',body:'<p>Number portability is your right in Hong Kong. Providers cannot hold your number hostage.</p><h3>How long should porting take?</h3><p>Under OFCA rules, a port should complete within <strong>1 working day</strong> once approved.</p><h3>Common blocking tactics</h3><ul><li>Claiming you have an outstanding balance</li><li>Saying your contract has not ended</li><li>Requiring a physical store visit</li><li>Applying an ETF to delay the process</li></ul><h3>What to do if blocked</h3><p>File a written complaint citing the <strong>Mobile Number Portability Code</strong>. If unresolved in 5 working days, escalate to OFCA.</p><div class="blog-tip">💡 Keep your old SIM active until the port is confirmed complete.</div>'},zh:{title:'電話號碼攜帶：轉換電訊商時您的權利',summary:'轉換電訊商應該很簡單。了解相關規定。',meta:'5分鐘閱讀 · 號碼攜帶',body:'<p>號碼可攜性是您在香港的權利。電訊商不能扣押您的號碼。</p><h3>號碼攜帶需要多長時間？</h3><p>根據OFCA規定，一旦獲批應在<strong>1個工作天</strong>內完成。</p><h3>常見阻撓手法</h3><ul><li>聲稱您有未付結欠</li><li>聲稱合約未到期</li><li>要求親身前往門市</li><li>徵收提前終止費</li></ul><h3>若號碼攜帶被阻止</h3><p>立即引用<strong>流動電話號碼可攜性守則</strong>提交書面投訴。5個工作天內未解決則向OFCA上報。</p><div class="blog-tip">💡 在確認攜帶完成前，請保持舊SIM卡啟用。</div>'}},
+  {tag:{en:'CUSTOMER SERVICE',zh:'客戶服務'},en:{title:"What to do when a telecom provider's customer service fails you",summary:"Poor customer service is itself a complaint issue.",meta:'4 min read · Customer Service',body:'<p>Being stuck on hold or given conflicting information is a failure of the provider\'s obligations.</p><h3>Document every interaction</h3><p>Note date, time, agent name, and what was said. Follow each call with an email summary.</p><h3>Escalate within the provider first</h3><p>Ask for a supervisor or the Customer Relations Department. Request their direct contact in writing.</p><h3>Use the formal complaints channel</h3><p>Every licensed provider must have a formal written complaints procedure that triggers a regulatory timeline.</p><h3>Go public if necessary</h3><p>The Consumer Council publishes complaint statistics by provider.</p><div class="blog-tip">💡 A formal email via RightlyHK carries more weight than a phone call.</div>'},zh:{title:'當電訊商客戶服務令您失望時該怎辦',summary:'惡劣的客戶服務本身就是一個投訴問題。',meta:'4分鐘閱讀 · 客戶服務',body:'<p>被長時間擱置或收到相互矛盾的信息，是電訊商未能履行責任的表現。</p><h3>記錄每次互動</h3><p>記錄日期、時間、客服姓名及所說內容。每次電話後以電郵跟進。</p><h3>先在電訊商內部升級</h3><p>要求與主管或客戶關係部門交談。</p><h3>使用正式投訴渠道</h3><p>每家持牌電訊商必須設有正式書面投訴程序。</p><h3>必要時公開事件</h3><p>消費者委員會按電訊商公布投訴統計數字。</p><div class="blog-tip">💡 透過RightlyHK發送的正式電郵比電話更具分量。</div>'}}
+];
+
+function setBlogLang(l){blogLang=l;ge('bl-en').className='bl-btn'+(l==='en'?' on':'');ge('bl-zh').className='bl-btn'+(l==='zh'?' on':'');renderBlogList();}
+function renderBlogList(){
+  var L=T[blogLang];
+  ['bl-list-title','bl-list-sub','bl-breadcrumb','bl-count'].forEach(function(id){var el=ge(id);if(el&&L[id])el.textContent=L[id];});
+  ge('blog-grid').innerHTML=posts.map(function(p,i){var bl=p[blogLang]||p.en;var tag=p.tag[blogLang]||p.tag.en;return '<div class="blog-card" onclick="openPost('+i+')"><div class="blog-card-tag">'+tag+'</div><h3>'+bl.title+'</h3><p>'+bl.summary+'</p><div class="blog-card-meta">📖 '+bl.meta+'</div><div class="read-more">'+(blogLang==='zh'?'閱讀全文 →':'Read more →')+'</div></div>';}).join('');
+}
+function openPost(i){
+  currentPost=i;var p=posts[i];var bl=p[blogLang]||p.en;var tag=p.tag[blogLang]||p.tag.en;var L=T[blogLang];
+  ge('post-tag').textContent=tag;ge('post-title').textContent=bl.title;ge('post-meta').textContent=bl.meta;ge('post-body').innerHTML=bl.body;
+  ge('bc-home').textContent=L['bc-home'];ge('bc-guides').textContent=L['bc-guides'];
+  ge('bc-post').textContent=bl.title.length>40?bl.title.substring(0,40)+'…':bl.title;
+  ge('cta-title').textContent=L['cta-title'];ge('cta-sub').textContent=L['cta-sub'];ge('cta-btn').textContent=L['cta-btn'];ge('sb-title').textContent=L['sb-title'];
+  ge('sidebar-links').innerHTML=posts.filter(function(_,si){return si!==i;}).map(function(sp){var si=posts.indexOf(sp);var sbl=sp[blogLang]||sp.en;var stag=sp.tag[blogLang]||sp.tag.en;return '<div class="blog-card" onclick="openPost('+si+')"><div class="blog-card-tag">'+stag+'</div><h3 style="font-size:14px">'+sbl.title+'</h3><div class="blog-card-meta">📖 '+sbl.meta+'</div><div class="read-more">'+(blogLang==='zh'?'閱讀全文 →':'Read more →')+'</div></div>';}).join('');
+  var nav='';
+  if(i>0){var prev=posts[i-1][blogLang]||posts[i-1].en;nav+='<div class="blog-nav-btn" onclick="openPost('+(i-1)+')"><div class="dir">'+L['blog-prev']+'</div><div class="ttl">'+prev.title+'</div></div>';}
+  if(i<posts.length-1){var next=posts[i+1][blogLang]||posts[i+1].en;nav+='<div class="blog-nav-btn" style="text-align:right" onclick="openPost('+(i+1)+')"><div class="dir">'+L['blog-next']+'</div><div class="ttl">'+next.title+'</div></div>';}
+  ge('post-nav').innerHTML=nav;
+  goPage('blog-post');
+}
+
+applyLang();
+renderBlogList();
+</script>
+</body>
+</html>
