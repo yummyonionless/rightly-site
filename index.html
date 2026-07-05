@@ -27,7 +27,7 @@ nav{background:var(--blue);color:#fff;padding:0 2rem;display:flex;align-items:ce
 .how-num{width:34px;height:34px;border-radius:50%;background:var(--blue);color:#fff;font-weight:700;font-size:14px;display:flex;align-items:center;justify-content:center;margin:0 auto .5rem}
 .how-step h4{font-size:13px;font-weight:600;margin-bottom:.2rem}
 .how-step p{font-size:12px;color:var(--muted)}
-main{max-width:860px;margin:0 auto;padding:2rem 1.5rem}
+main{max-width:1020px;margin:0 auto;padding:2rem 1.5rem}
 .card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:1.5rem;margin-bottom:1.5rem}
 .prog-bar{display:flex;gap:3px;margin-bottom:1.25rem}
 .prog-seg{flex:1;height:4px;border-radius:2px;background:var(--border);transition:background .3s}
@@ -116,6 +116,8 @@ td{padding:.6rem .75rem;border-bottom:1px solid var(--border);vertical-align:mid
 .bl-btn.on{background:var(--blue);color:#fff;border-color:var(--blue)}
 footer{background:var(--blue);color:rgba(255,255,255,.7);text-align:center;padding:1.5rem;font-size:13px;margin-top:3rem}
 footer strong{color:#fff}
+.s3-cols{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;align-items:start}
+@media(max-width:760px){.s3-cols{grid-template-columns:1fr}}
 .fab{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--red);color:#fff;border:none;border-radius:6px;padding:.6rem 1rem;font-size:13px;font-weight:600;cursor:pointer;z-index:200;box-shadow:0 2px 10px rgba(0,0,0,.25)}
 </style>
 </head>
@@ -176,6 +178,15 @@ footer strong{color:#fff}
       <button class="prov-btn" onclick="pickProv(this,'3 Hong Kong')"><div class="prov-logo-wrap"><svg viewBox="0 0 52 22" width="52" height="22"><rect width="52" height="22" rx="3" fill="#ee2e24"/><text x="26" y="16" text-anchor="middle" fill="#fff" font-size="16" font-weight="900" font-family="Arial,sans-serif">3</text></svg></div><span class="prov-label">3 Hong Kong</span></button>
       <button class="prov-btn" onclick="pickProv(this,'SmarTone')"><div class="prov-logo-wrap"><svg viewBox="0 0 52 22" width="52" height="22"><rect width="52" height="22" rx="3" fill="#e4002b"/><text x="26" y="15" text-anchor="middle" fill="#fff" font-size="7.5" font-weight="700" font-family="Arial,sans-serif">SmarTone</text></svg></div><span class="prov-label">SmarTone</span></button>
     </div>
+    <div class="grp-label" id="lbl-esim">eSIM / Prepaid / MVNO</div>
+    <div class="prov-grid" style="margin-bottom:.75rem">
+      <button class="prov-btn" onclick="pickProv(this,'Lucky SIM')"><div class="prov-logo-wrap"><svg viewBox="0 0 52 22" width="52" height="22"><rect width="52" height="22" rx="3" fill="#ffd400"/><text x="26" y="15" text-anchor="middle" fill="#1a1a2e" font-size="8.5" font-weight="700" font-family="Arial,sans-serif">Lucky SIM</text></svg></div><span class="prov-label">Lucky SIM</span></button>
+      <button class="prov-btn" onclick="pickProv(this,'Club Sim (HKT)')"><div class="prov-logo-wrap"><svg viewBox="0 0 52 22" width="52" height="22"><rect width="52" height="22" rx="3" fill="#e91e63"/><text x="26" y="15" text-anchor="middle" fill="#fff" font-size="8.5" font-weight="700" font-family="Arial,sans-serif">Club Sim</text></svg></div><span class="prov-label">Club Sim</span></button>
+      <button class="prov-btn" onclick="pickProv(this,'SoSIM (SmarTone)')"><div class="prov-logo-wrap"><svg viewBox="0 0 52 22" width="52" height="22"><rect width="52" height="22" rx="3" fill="#00c4b3"/><text x="26" y="15" text-anchor="middle" fill="#fff" font-size="9" font-weight="700" font-family="Arial,sans-serif">SoSIM</text></svg></div><span class="prov-label">SoSIM</span></button>
+      <button class="prov-btn" onclick="pickProv(this,'MobileDuck 鴨聊佳 (CMHK)')"><div class="prov-logo-wrap"><svg viewBox="0 0 52 22" width="52" height="22"><rect width="52" height="22" rx="3" fill="#ffb300"/><text x="26" y="15.5" text-anchor="middle" fill="#1a1a2e" font-size="9" font-weight="700" font-family="Arial,sans-serif">鴨聊佳</text></svg></div><span class="prov-label">鴨聊佳</span></button>
+      <button class="prov-btn" onclick="pickProv(this,'Birdie (HKT)')"><div class="prov-logo-wrap"><svg viewBox="0 0 52 22" width="52" height="22"><rect width="52" height="22" rx="3" fill="#7c4dff"/><text x="26" y="15" text-anchor="middle" fill="#fff" font-size="9" font-weight="700" font-family="Arial,sans-serif">Birdie</text></svg></div><span class="prov-label">Birdie</span></button>
+      <button class="prov-btn" onclick="pickProv(this,'CUniq HK (China Unicom)')"><div class="prov-logo-wrap"><svg viewBox="0 0 52 22" width="52" height="22"><rect width="52" height="22" rx="3" fill="#e60012"/><text x="26" y="15" text-anchor="middle" fill="#fff" font-size="8.5" font-weight="700" font-family="Arial,sans-serif">CUniq</text></svg></div><span class="prov-label">CUniq HK</span></button>
+    </div>
     <button class="prov-btn" style="width:100%;border-style:dashed;color:var(--blue);margin-bottom:.75rem;flex-direction:row;gap:.5rem;justify-content:center;padding:.65rem" onclick="pickProv(this,'__custom__')">
       <span style="font-size:18px;line-height:1">+</span><span id="lbl-custom-btn" style="font-size:13px;font-weight:600">Company not listed? Enter manually</span>
     </button>
@@ -199,6 +210,15 @@ footer strong{color:#fff}
       <button class="issue-btn" id="ib5" onclick="pickIssue(this,'Porting / SIM Issue')"></button>
       <button class="issue-btn" id="ib6" onclick="pickIssue(this,'Customer Service')"></button>
       <button class="issue-btn" id="ib7" onclick="pickIssue(this,'Cancellation Problem')"></button>
+      <button class="issue-btn" id="ib9" onclick="pickIssue(this,'Mis-selling / Sales Misconduct')"></button>
+      <button class="issue-btn" id="ib10" onclick="pickIssue(this,'Installation / Technician Visit')"></button>
+      <button class="issue-btn" id="ib11" onclick="pickIssue(this,'Roaming Charges')"></button>
+      <button class="issue-btn" id="ib12" onclick="pickIssue(this,'Equipment / Router Issue')"></button>
+      <button class="issue-btn" id="ib13" onclick="pickIssue(this,'Prepaid Card / Top-up Issue')"></button>
+      <button class="issue-btn" id="ib14" onclick="pickIssue(this,'Data Privacy Concern')"></button>
+      <button class="issue-btn" id="ib15" onclick="pickIssue(this,'Auto-renewal / Contract Expiry Trap')"></button>
+      <button class="issue-btn" id="ib16" onclick="pickIssue(this,'Pocket WiFi / Rental Device')"></button>
+      <button class="issue-btn" id="ib17" onclick="pickIssue(this,'Unwanted Value-added Services')"></button>
       <button class="issue-btn" id="ib8" onclick="pickIssue(this,'Other')"></button>
     </div>
     <div class="wnav"><button class="btn-back" id="bk2" onclick="goStep(1)">← Back</button><button class="btn-next" id="n2" onclick="goStep(3)" disabled>Next →</button></div>
@@ -208,43 +228,45 @@ footer strong{color:#fff}
   <div class="wstep" id="s3">
     <div class="step-label" id="s3lbl">Step 3 of 4 — Your details &amp; AI-polished email</div>
 
-    <!-- 1. Issue-specific dynamic fields FIRST -->
-    <div id="issue-fields"></div>
+    <div class="s3-cols">
+      <!-- LEFT: form -->
+      <div class="s3-left">
+        <div id="issue-fields"></div>
 
-    <!-- 2. Complaint details -->
-    <label id="lbl-det">Additional details (optional)</label>
-    <textarea id="det" autocomplete="off" oninput="onDetInput()"></textarea>
+        <label id="lbl-det">Additional details (optional)</label>
+        <textarea id="det" autocomplete="off" oninput="onDetInput()"></textarea>
 
-    <!-- zh tip -->
-    <div class="tip" id="zh-tip">💡 <strong>小貼士 Tip:</strong> 研究顯示，以英文提交的投訴往往獲得更快回應。我們的AI可將您的中文描述直接轉化為專業英文投訴信。<br/><span style="opacity:.8;font-size:12px">Complaints in English tend to get faster responses.</span></div>
+        <div class="tip" id="zh-tip">💡 <strong>小貼士 Tip:</strong> 研究顯示，以英文提交的投訴往往獲得更快回應。我們的AI可將您的中文描述直接轉化為專業英文投訴信。<br/><span style="opacity:.8;font-size:12px">Complaints in English tend to get faster responses.</span></div>
 
-    <!-- 3. Draft language & tone -->
-    <div class="lang-toggle-row">
-      <div>
-        <div style="font-size:13px;font-weight:700;color:var(--blue);margin-bottom:.15rem" id="draft-lang-lbl">Draft language</div>
-        <div style="font-size:12px;color:var(--muted)" id="draft-lang-sub">English is recommended for faster response</div>
+        <div class="lang-toggle-row">
+          <div>
+            <div style="font-size:13px;font-weight:700;color:var(--blue);margin-bottom:.15rem" id="draft-lang-lbl">Letter language</div>
+            <div style="font-size:12px;color:var(--muted)" id="draft-lang-sub">English is recommended for faster response — switch to 繁中 anytime to preview.</div>
+          </div>
+          <div style="display:flex;gap:.4rem">
+            <button class="tone-btn on" id="dl-en" onclick="setDraftLang('en')">🇬🇧 English <span style="color:#e0a020;font-size:10px;font-weight:700">✓ Send</span></button>
+            <button class="tone-btn" id="dl-zh" onclick="setDraftLang('zh')">🇭🇰 繁中預覽</button>
+          </div>
+        </div>
+        <label id="lbl-tone">Tone</label>
+        <div class="tone-row">
+          <button class="tone-btn on" id="tb1" onclick="pickTone(this,'formal')">Formal</button>
+          <button class="tone-btn" id="tb2" onclick="pickTone(this,'firm')">Firm &amp; Assertive</button>
+          <button class="tone-btn" id="tb3" onclick="pickTone(this,'concise')">Concise</button>
+        </div>
       </div>
-      <div style="display:flex;gap:.4rem">
-        <button class="tone-btn on" id="dl-en" onclick="setDraftLang('en')">🇬🇧 English <span style="color:#e0a020;font-size:10px;font-weight:700">✓ Send</span></button>
-        <button class="tone-btn" id="dl-zh" onclick="setDraftLang('zh')">🇭🇰 繁中預覽</button>
+
+      <!-- RIGHT: live letter preview (sticky) -->
+      <div class="s3-right">
+        <div class="ai-section" style="position:sticky;top:72px">
+          <div class="ai-hdr"><span class="ai-badge">AI DRAFT</span><span id="ai-sub" style="font-size:12px;color:var(--muted)">Live preview · Editable</span></div>
+          <textarea class="ai-email-box" id="ai-email" style="display:none;min-height:340px"></textarea>
+          <div id="ai-placeholder" style="color:var(--muted);font-size:13px;padding:.5rem 0">👈 Answer the questions and your letter will appear here instantly.</div>
+        </div>
       </div>
     </div>
-    <label id="lbl-tone">Tone</label>
-    <div class="tone-row">
-      <button class="tone-btn on" id="tb1" onclick="pickTone(this,'formal')">Formal</button>
-      <button class="tone-btn" id="tb2" onclick="pickTone(this,'firm')">Firm &amp; Assertive</button>
-      <button class="tone-btn" id="tb3" onclick="pickTone(this,'concise')">Concise</button>
-    </div>
 
-    <!-- 4. LETTER PREVIEW -->
-    <div class="ai-section">
-      <div class="ai-hdr"><span class="ai-badge">AI DRAFT</span><span id="ai-sub" style="font-size:12px;color:var(--muted)">Powered by RightlyHK · Editable</span></div>
-      <textarea class="ai-email-box" id="ai-email" style="display:none"></textarea>
-      <div id="ai-placeholder" style="color:var(--muted);font-size:13px;padding:.5rem 0">Answer the questions above to preview your complaint letter here.</div>
-      <div class="ai-load" id="ai-load" style="display:none"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span id="ai-loading-txt" style="margin-left:6px">Drafting...</span></div>
-    </div>
-
-    <!-- 5. CONTACT INFO (after preview) -->
+    <!-- CONTACT INFO (below, full width) -->
     <div style="border-top:2px solid var(--border);margin-top:1.25rem;padding-top:1.25rem">
       <div style="font-size:14px;font-weight:700;color:var(--blue);margin-bottom:.75rem" id="contact-hdr">✉️ Your contact details — so we can send the letter and track replies</div>
 
@@ -254,18 +276,6 @@ footer strong{color:#fff}
       <label id="lbl-ue">Your email address *</label>
       <input type="email" id="uemail" autocomplete="off" oninput="checkS3()" style="border-color:var(--blue-mid)"/>
       <div style="font-size:12px;color:var(--blue);margin-top:-.5rem;margin-bottom:.75rem" id="ue-hint">Required — we will send you a copy and case updates.</div>
-
-      <label id="lbl-phone">Phone number (optional)</label>
-      <input type="tel" id="phone" maxlength="9" autocomplete="off" oninput="fmtPhone(this)"/>
-
-      <label id="lbl-ref">Reference number (optional)</label>
-      <input type="text" id="refnum" autocomplete="off"/>
-
-      <label id="lbl-contract">Contract start date (optional)</label>
-      <input type="text" id="contractdate" autocomplete="off"/>
-
-      <label id="lbl-plan">Service plan name (optional)</label>
-      <input type="text" id="planname" autocomplete="off"/>
     </div>
 
     <div class="wnav">
@@ -285,6 +295,16 @@ footer strong{color:#fff}
       <div><strong id="rvl5">Your email:</strong> <span id="rv-ue"></span></div>
     </div>
     <label id="lbl-final">Final email (editable)</label>
+    <!-- English recommendation banner (shows when letter is in Chinese) -->
+    <div id="en-rec-banner" style="display:none;background:#eaf4fb;border:1.5px solid var(--blue-mid);border-radius:8px;padding:1rem;margin-bottom:.75rem">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem">
+        <div style="flex:1;min-width:200px">
+          <div style="font-size:13px;font-weight:700;color:var(--blue);margin-bottom:.2rem" id="en-rec-title">💡 建議以英文發送</div>
+          <div style="font-size:12px;color:var(--muted);line-height:1.6" id="en-rec-sub">英文投訴信通常獲電訊商更快處理及回應。內容完全相同，只是語言不同。</div>
+        </div>
+        <button onclick="switchFinalToEN()" style="background:var(--blue);color:#fff;border:none;padding:.6rem 1.2rem;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap" id="en-rec-btn">🇬🇧 一鍵轉為英文版</button>
+      </div>
+    </div>
     <textarea id="final-email" style="min-height:220px;font-size:13px;line-height:1.7"></textarea>
     <p id="lbl-fnote" style="font-size:12px;color:var(--muted);margin-bottom:.5rem">All provider replies to your Case ID address are tracked. Unresolved after 30 days? Escalate to OFCA.</p>
     <div class="wnav"><button class="btn-back" id="bk4" onclick="goStep(3)">← Back</button><button class="btn-next" id="n4" onclick="doSubmit()">Send Complaint ✉️</button></div>
@@ -416,7 +436,7 @@ footer strong{color:#fff}
 <script>
 var lang='en', blogLang='en', prov='', issue='', tone='formal', draftLang='en', caseN=14, currentPost=0;
 var ADMIN_PW='rightlyhk2026';
-var provEmails={'PCCW':'cs@pccw.com','HKT':'cs@hkt.com','HKBN':'cs@hkbn.net','HGC Global Communications':'cs@hgc.com.hk','China Mobile Hong Kong (Broadband)':'cs@chinamobilehk.com','Hong Kong Cable Television':'cs@hkcable.com.hk','WTT (HKBN Enterprise Solutions)':'cs@wtt.com','China Mobile Hong Kong (Mobile)':'cs@chinamobilehk.com','csl.':'cs@csl.com.hk','1010':'cs@1010.com.hk','3 Hong Kong':'cs@three.com.hk','SmarTone':'care@smartone.com'};
+var provEmails={'PCCW':'cs@pccw.com','HKT':'cs@hkt.com','HKBN':'cs@hkbn.net','HGC Global Communications':'cs@hgc.com.hk','China Mobile Hong Kong (Broadband)':'cs@chinamobilehk.com','Hong Kong Cable Television':'cs@hkcable.com.hk','WTT (HKBN Enterprise Solutions)':'cs@wtt.com','China Mobile Hong Kong (Mobile)':'cs@chinamobilehk.com','csl.':'cs@csl.com.hk','1010':'cs@1010.com.hk','3 Hong Kong':'cs@three.com.hk','SmarTone':'care@smartone.com','Lucky SIM':'cs@luckysim.com.hk','Club Sim (HKT)':'cs@clubsim.com.hk','SoSIM (SmarTone)':'cs@sosim.com.hk','MobileDuck 鴨聊佳 (CMHK)':'cs@mobileduck.com.hk','Birdie (HKT)':'hello@birdie.com.hk','CUniq HK (China Unicom)':'cs@cuniq.com'};
 
 function gv(id){var e=document.getElementById(id);return e?e.value.trim():'';}
 function ge(id){return document.getElementById(id);}
@@ -503,6 +523,27 @@ function fillReview(){
   ge('rv-from').textContent=cid.toLowerCase()+'@rightlyhk.com';
   ge('rv-ue').textContent=gv('uemail')||(lang==='zh'?'未提供':'Not provided');
   ge('final-email').value=gv('ai-email');
+  updateENBanner();
+}
+function updateENBanner(){
+  var banner=ge('en-rec-banner');
+  if(!banner) return;
+  var isZHLetter=/[\u4e00-\u9fff]/.test(gv('final-email'))&&draftLang==='zh';
+  banner.style.display=isZHLetter?'block':'none';
+}
+function switchFinalToEN(){
+  draftLang='en';
+  ge('dl-en').className='tone-btn on';
+  ge('dl-zh').className='tone-btn';
+  var newLetter=buildDraft();
+  ge('ai-email').value=newLetter;
+  ge('final-email').value=newLetter;
+  var banner=ge('en-rec-banner');
+  if(banner){
+    banner.style.background='var(--green-light)';
+    banner.style.borderColor='var(--green)';
+    banner.innerHTML='<div style="font-size:13px;font-weight:600;color:var(--green)">✅ '+(lang==='zh'?'已轉為英文版本，可以發送了！':'Switched to the English version — ready to send!')+'</div>';
+  }
 }
 function doSubmit(){
   caseN++;
@@ -526,7 +567,7 @@ function resetWizard(){
   goStep(1);
 }
 
-var issueZH={'Billing / Overcharge':'賬單／多收費用','Service Outage':'服務中斷','Contract Dispute':'合約糾紛','Poor Signal / Speed':'訊號差／網速慢','Porting / SIM Issue':'號碼攜帶／SIM問題','Customer Service':'客戶服務','Cancellation Problem':'取消服務問題','Other':'其他'};
+var issueZH={'Billing / Overcharge':'賬單／多收費用','Service Outage':'服務中斷','Contract Dispute':'合約糾紛','Poor Signal / Speed':'訊號差／網速慢','Porting / SIM Issue':'號碼攜帶／SIM問題','Customer Service':'客戶服務','Cancellation Problem':'取消服務問題','Mis-selling / Sales Misconduct':'銷售誤導／不良銷售手法','Installation / Technician Visit':'上門安裝／技術員','Roaming Charges':'漫遊收費','Equipment / Router Issue':'設備／路由器問題','Prepaid Card / Top-up Issue':'預付卡／增值問題','Data Privacy Concern':'個人資料私隱','Auto-renewal / Contract Expiry Trap':'自動續約／約滿陷阱','Pocket WiFi / Rental Device':'Wi-Fi蛋／租借裝置','Unwanted Value-added Services':'未經同意的增值服務','Other':'其他'};
 function issueName(useZH){return useZH?(issueZH[issue]||issue):issue;}
 
 // ── ISSUE-SPECIFIC FIELDS (Resolver-style: selectable, guided) ──
@@ -583,7 +624,7 @@ var issueFields={
       {en:'Frequent buffering / lag during peak hours',zh:'繁忙時段經常緩慢／延遲'},
       {en:'5G not available despite 5G plan',zh:'購買5G計劃但無5G服務'}]},
     {id:'if-speedpromised',type:'text',en:'Advertised speed (e.g. 1000Mbps)',zh:'宣傳網速（例如1000Mbps）'},
-    {id:'if-speedactual',type:'text',en:'Actual speed from speedtest.ofca.gov.hk',zh:'實際網速（用speedtest.ofca.gov.hk測試）'},
+    {id:'if-speedactual',type:'text',en:'Actual speed you are getting',zh:'實際網速'},
     {id:'if-speedsince',type:'date',en:'When did the problem start?',zh:'問題開始日期'}
   ],
   'Porting / SIM Issue':[
@@ -625,6 +666,104 @@ var issueFields={
       {en:'In store',zh:'門市'},
       {en:'Email / written notice',zh:'電郵／書面通知'},
       {en:'Online account portal',zh:'網上帳戶系統'}]}
+  ],
+  'Mis-selling / Sales Misconduct':[
+    {id:'if-sub',type:'select',en:'What happened?',zh:'發生了什麼事？',opts:[
+      {en:'Salesperson made promises not in the contract',zh:'銷售員作出合約以外的承諾'},
+      {en:'Signed up for services I did not agree to',zh:'被登記了我沒有同意的服務'},
+      {en:'Hidden fees were not disclosed',zh:'隱藏收費未有披露'},
+      {en:'Pressured or misled into signing',zh:'被施壓或誤導簽約'},
+      {en:'Free gift / rebate never delivered',zh:'贈品／回贈從未兌現'}]},
+    {id:'if-msdate',type:'date',en:'When did the sale happen?',zh:'銷售發生日期'},
+    {id:'if-mswhere',type:'select',en:'Where did the sale take place?',zh:'銷售在哪裡進行？',opts:[
+      {en:'Street booth / roadshow',zh:'街站／推廣攤位'},
+      {en:'Physical store',zh:'門市'},
+      {en:'Telemarketing call',zh:'電話推銷'},
+      {en:'Door-to-door',zh:'上門推銷'},
+      {en:'Online',zh:'網上'}]},
+    {id:'if-mssales',type:'text',en:'Salesperson name / ID (if known)',zh:'銷售員姓名／編號（如知道）'}
+  ],
+  'Installation / Technician Visit':[
+    {id:'if-sub',type:'select',en:'What went wrong?',zh:'出了什麼問題？',opts:[
+      {en:'Technician missed the appointment',zh:'技術員爽約'},
+      {en:'Repeated rescheduling by the provider',zh:'電訊商多次改期'},
+      {en:'Installation was done incorrectly',zh:'安裝不當'},
+      {en:'Damage caused to my property',zh:'安裝時損壞我的財物'},
+      {en:'Long wait for installation slot',zh:'安裝排期過長'}]},
+    {id:'if-instdate',type:'date',en:'Appointment / installation date',zh:'預約／安裝日期'},
+    {id:'if-instaddr',type:'text',en:'Installation address (district)',zh:'安裝地址（地區）'}
+  ],
+  'Roaming Charges':[
+    {id:'if-sub',type:'select',en:'What best describes the problem?',zh:'哪項最符合您的問題？',opts:[
+      {en:'Charged roaming fees I never activated',zh:'被收取從未開通的漫遊費用'},
+      {en:'Roaming package did not work overseas',zh:'漫遊套餐在海外無法使用'},
+      {en:'Charged far more than the quoted rate',zh:'收費遠高於報價'},
+      {en:'Data roaming continued after I switched it off',zh:'關閉後仍被收取數據漫遊費'}]},
+    {id:'if-roamdest',type:'text',en:'Country / destination',zh:'國家／目的地'},
+    {id:'if-roamdate',type:'date',en:'Travel date',zh:'出行日期'},
+    {id:'if-roamamt',type:'text',en:'Disputed roaming amount (HK$)',zh:'爭議漫遊金額（港幣）'}
+  ],
+  'Equipment / Router Issue':[
+    {id:'if-sub',type:'select',en:'What best describes the problem?',zh:'哪項最符合您的問題？',opts:[
+      {en:'Router / equipment is faulty',zh:'路由器／設備故障'},
+      {en:'Provider refuses to repair or replace',zh:'電訊商拒絕維修或更換'},
+      {en:'Charged for equipment I returned',zh:'已退還設備但仍被收費'},
+      {en:'Equipment never delivered',zh:'設備從未送達'},
+      {en:'Charged an unfair damage fee',zh:'被收取不合理的損壞費用'}]},
+    {id:'if-eqdate',type:'date',en:'When did the problem start?',zh:'問題開始日期'},
+    {id:'if-eqmodel',type:'text',en:'Equipment model (if known)',zh:'設備型號（如知道）'}
+  ],
+  'Prepaid Card / Top-up Issue':[
+    {id:'if-sub',type:'select',en:'What best describes the problem?',zh:'哪項最符合您的問題？',opts:[
+      {en:'Top-up paid but balance not credited',zh:'已增值但餘額未到帳'},
+      {en:'Balance expired earlier than stated',zh:'餘額比說明提早到期'},
+      {en:'Balance deducted without usage',zh:'沒有使用但餘額被扣除'},
+      {en:'Card / eSIM could not be activated',zh:'卡／eSIM無法啟用'},
+      {en:'Refund refused for unused balance',zh:'拒絕退還未使用餘額'}]},
+    {id:'if-ppdate',type:'date',en:'When did this happen?',zh:'發生日期'},
+    {id:'if-ppamt',type:'text',en:'Amount involved (HK$)',zh:'涉及金額（港幣）'}
+  ],
+  'Data Privacy Concern':[
+    {id:'if-sub',type:'select',en:'What best describes the concern?',zh:'哪項最符合您的問題？',opts:[
+      {en:'Received marketing calls/SMS after opting out',zh:'選擇拒收後仍收到推銷電話／短訊'},
+      {en:'My personal data was shared without consent',zh:'個人資料在未經同意下被分享'},
+      {en:'Suspected data leak from the provider',zh:'懷疑電訊商洩漏資料'},
+      {en:'Cannot access or correct my personal data',zh:'無法查閱或更正個人資料'}]},
+    {id:'if-dpdate',type:'date',en:'When did you notice this?',zh:'何時發現此問題？'}
+  ],
+  'Auto-renewal / Contract Expiry Trap':[
+    {id:'if-sub',type:'select',en:'What happened?',zh:'發生了什麼事？',opts:[
+      {en:'Contract was auto-renewed without my clear consent',zh:'合約在未經我明確同意下自動續約'},
+      {en:'No renewal notice before the contract expired',zh:'合約到期前沒有收到續約通知'},
+      {en:'Charged much higher standard rates after contract expired',zh:'約滿後被收取遠高於合約價的標準收費'},
+      {en:'Loyal customer charged more than new customers for the same plan',zh:'同一計劃，舊客戶收費貴過新客戶'},
+      {en:'Repeated harassing renewal calls / messages',zh:'不斷收到騷擾式續約電話／訊息'},
+      {en:'Charged a full month after switching provider mid-cycle',zh:'月中轉台仍被收取整月費用'}]},
+    {id:'if-ardate',type:'date',en:'Contract expiry / renewal date',zh:'合約到期／續約日期'},
+    {id:'if-arold',type:'text',en:'Original monthly fee (HK$)',zh:'原本月費（港幣）'},
+    {id:'if-arnew',type:'text',en:'New / standard rate charged (HK$)',zh:'新收費／標準收費（港幣）'}
+  ],
+  'Pocket WiFi / Rental Device':[
+    {id:'if-sub',type:'select',en:'What went wrong?',zh:'出了什麼問題？',opts:[
+      {en:'Device did not work at the destination',zh:'裝置在目的地無法使用'},
+      {en:'Deposit refund delayed or refused',zh:'按金退款被拖延或拒絕'},
+      {en:'Unreasonable refund timeline (e.g. hundreds of working days)',zh:'退款時間不合理（例如數百個工作天）'},
+      {en:'Charged for damage I did not cause',zh:'被收取非我造成的損壞費用'},
+      {en:'Device speed / coverage far below promised',zh:'裝置速度／覆蓋遠低於承諾'}]},
+    {id:'if-wfdest',type:'text',en:'Destination / country of use',zh:'使用目的地／國家'},
+    {id:'if-wfdate',type:'date',en:'Rental / travel date',zh:'租借／出行日期'},
+    {id:'if-wfamt',type:'text',en:'Rental fee & deposit paid (HK$)',zh:'已付租金及按金（港幣）'}
+  ],
+  'Unwanted Value-added Services':[
+    {id:'if-sub',type:'select',en:'What happened?',zh:'發生了什麼事？',opts:[
+      {en:'Free trial converted to paid without clear reminder',zh:'免費試用期後未有清楚提示便自動收費'},
+      {en:'Value-added services added without my consent',zh:'未經同意被加入增值服務'},
+      {en:'Sold multiple similar services I do not need',zh:'被推銷多項性質相似、不需要的服務'},
+      {en:'Elderly family member was oversold unnecessary services',zh:'年長家人被推銷不必要的服務'},
+      {en:'Cannot cancel the value-added service',zh:'無法取消增值服務'}]},
+    {id:'if-vasname',type:'text',en:'Name of the service(s) (e.g. cloud storage, secondary SIM)',zh:'服務名稱（例如雲端儲存、副卡）'},
+    {id:'if-vasfee',type:'text',en:'Monthly fee charged (HK$)',zh:'每月收費（港幣）'},
+    {id:'if-vasdate',type:'date',en:'When did charges start?',zh:'收費開始日期'}
   ],
   'Other':[
     {id:'if-otherdate',type:'date',en:'When did the issue occur?',zh:'問題發生日期'}
@@ -710,7 +849,7 @@ function buildDraft(){
   var plan=gv('planname');
   var isZH=draftLang==='zh';
   var date=new Date().toLocaleDateString(isZH?'zh-HK':'en-GB',{year:'numeric',month:'long',day:'numeric'});
-  var remedies={'Billing / Overcharge':{en:'I request an immediate refund of the overcharged amount and a written explanation.',zh:'要求立即退回多收款項，並提供書面解釋。'},'Service Outage':{en:'I request a bill credit for the full period of service disruption.',zh:'要求就服務中斷期間提供相應的費用減免。'},'Contract Dispute':{en:'I request an immediate review of the contract terms and resolution without penalty.',zh:'要求立即重新審視合約條款，並在不收取任何費用的情況下解決此爭議。'},'Poor Signal / Speed':{en:'I request immediate improvement of service quality or a proportionate bill credit.',zh:'要求立即改善服務質素，或提供相應的費用減免。'},'Porting / SIM Issue':{en:'I request immediate completion of the number port per the Mobile Number Portability Code.',zh:'要求立即按照《流動電話號碼可攜性守則》完成號碼攜帶手續。'},'Customer Service':{en:'I request a formal written apology and follow-up from senior management.',zh:'要求正式書面道歉，並由高級管理人員跟進此事。'},'Cancellation Problem':{en:'I request immediate service cancellation with written confirmation of no further charges.',zh:'要求立即取消服務，並以書面確認不會收取任何額外費用。'},'Other':{en:'I request a written response and resolution within 10 business days.',zh:'要求在10個工作天內提供書面回覆及解決方案。'}};
+  var remedies={'Billing / Overcharge':{en:'I request an immediate refund of the overcharged amount and a written explanation.',zh:'要求立即退回多收款項，並提供書面解釋。'},'Service Outage':{en:'I request a bill credit for the full period of service disruption.',zh:'要求就服務中斷期間提供相應的費用減免。'},'Contract Dispute':{en:'I request an immediate review of the contract terms and resolution without penalty.',zh:'要求立即重新審視合約條款，並在不收取任何費用的情況下解決此爭議。'},'Poor Signal / Speed':{en:'I request immediate improvement of service quality or a proportionate bill credit.',zh:'要求立即改善服務質素，或提供相應的費用減免。'},'Porting / SIM Issue':{en:'I request immediate completion of the number port per the Mobile Number Portability Code.',zh:'要求立即按照《流動電話號碼可攜性守則》完成號碼攜帶手續。'},'Customer Service':{en:'I request a formal written apology and follow-up from senior management.',zh:'要求正式書面道歉，並由高級管理人員跟進此事。'},'Cancellation Problem':{en:'I request immediate service cancellation with written confirmation of no further charges.',zh:'要求立即取消服務，並以書面確認不會收取任何額外費用。'},'Mis-selling / Sales Misconduct':{en:'I request cancellation of the mis-sold contract without penalty and a full refund of related charges, given the misrepresentation at the point of sale.',zh:'鑑於銷售時的失實陳述，要求在不收取罰款的情況下取消該合約，並全數退回相關費用。'},'Installation / Technician Visit':{en:'I request a confirmed installation appointment within 7 days and compensation for the inconvenience caused.',zh:'要求在7天內確認安裝預約，並就所造成的不便作出補償。'},'Roaming Charges':{en:'I request a full waiver of the disputed roaming charges and an itemised breakdown of how they were incurred.',zh:'要求全數豁免爭議漫遊收費，並提供收費明細。'},'Equipment / Router Issue':{en:'I request repair or replacement of the equipment at no cost, or a refund of related charges.',zh:'要求免費維修或更換設備，或退回相關費用。'},'Prepaid Card / Top-up Issue':{en:'I request immediate crediting of the outstanding balance or a full refund of the amount paid.',zh:'要求立即補回餘額或全數退款。'},'Data Privacy Concern':{en:'I request written confirmation of how my personal data is being handled, in accordance with the Personal Data (Privacy) Ordinance (Cap. 486). I reserve the right to complain to the PCPD.',zh:'要求根據《個人資料（私隱）條例》（第486章）以書面確認我的個人資料處理方式。本人保留向私隱專員公署投訴的權利。'},'Auto-renewal / Contract Expiry Trap':{en:'Per the CAHK Industry Code of Practice for Telecommunications Service Contracts, auto-renewal requires my explicit documented consent. I request immediate cancellation of the auto-renewed contract without penalty and a refund of any excess charges above my original contract rate.',zh:'根據香港通訊業聯會《電訊服務合約業界實務守則》，自動續約必須獲得客戶明確同意並備存證據。要求立即在不收取罰款的情況下取消自動續約合約，並退回超出原合約價的差額。'},'Pocket WiFi / Rental Device':{en:'I request a full refund of the rental fee and immediate return of my deposit within 14 days, given the device failed to provide the promised service.',zh:'鑑於裝置未能提供承諾的服務，要求全數退回租金，並在14天內退還按金。'},'Unwanted Value-added Services':{en:'I request immediate cancellation of all value-added services I did not explicitly consent to, and a full refund of the related charges from the date they began.',zh:'要求立即取消所有未經本人明確同意的增值服務，並全數退回由收費開始日起的相關費用。'},'Other':{en:'I request a written response and resolution within 10 business days.',zh:'要求在10個工作天內提供書面回覆及解決方案。'}};
   var rem=(remedies[issue]||remedies['Other']);
   var ofca=isZH?'如貴公司未能在30天內妥善解決此投訴，本人保留向通訊事務管理局辦公室（OFCA）提出正式投訴的權利，此乃根據《電訊條例》（第106章）所賦予本人的合法權利。':'Should this complaint remain unresolved within 30 days, I reserve the right to escalate to the Office of the Communications Authority (OFCA) under the Telecommunications Ordinance (Cap. 106).';
   var info='';
@@ -765,14 +904,14 @@ function resolve(btn){btn.closest('td').previousElementSibling.innerHTML='<span 
 
 // ── LANG ──
 var T={
-  en:{'nav-complaint':'File Complaint','nav-guides':'Guides','lang-btn':'繁中','h-title':'Your Rights. Your Voice. Resolved.','h-sub':"Hong Kong's free telecom complaints platform — AI drafts your professional complaint letter in minutes, with every reply tracked by email.",'hero-cta1':'Start My Complaint','hero-cta2':'Read Guides','hw1h':'Pick Provider','hw1p':'Select your telecom company','hw2h':'Choose Issue','hw2p':'Tell us what went wrong','hw3h':'Add Details & Polish','hw3p':'Describe & AI-polish','hw4h':'Review & Send','hw4p':'Confirm and submit','wiz-title':'📋 File a Complaint — No Login Required','s1lbl':'Step 1 of 4 — Select your telecom provider','lbl-fixed':'Fixed Line / Broadband','lbl-mobile':'Mobile','lbl-custom-btn':'Company not listed? Enter manually','lbl-cn':'Company name *','lbl-ce':'Company complaint email (optional)','n1':'Next →','s2lbl':'Step 2 of 4 — What is the issue?','ib1':'💳 Billing / Overcharge','ib2':'📡 Service Outage','ib3':'📄 Contract Dispute','ib4':'📶 Poor Signal / Speed','ib5':'📱 Porting / SIM Issue','ib6':'🎧 Customer Service','ib7':'❌ Cancellation Problem','ib8':'❓ Other','bk2':'← Back','n2':'Next →','s3lbl':'Step 3 of 4 — Your details & AI-polished email','lbl-name':'Your name *','lbl-phone':'Phone number (optional)','lbl-ref':'Reference number (optional)','lbl-contract':'Contract start date (optional)','lbl-plan':'Service plan name (optional)','lbl-ue':'Your email address *','ue-hint':'Required — we will send you a copy and case updates.','lbl-det':'Additional details (optional)','det-ph':'Anything else you want to add? The questions above already cover the key facts.','contact-hdr':'✉️ Your contact details — so we can send the letter and track replies','draft-lang-lbl':'Letter language','draft-lang-sub':'We recommend sending in English for faster response — you can switch to 繁中 anytime to preview and understand the letter, then switch back before sending.','lbl-tone':'Tone','tb1':'Formal','tb2':'Firm & Assertive','tb3':'Concise','ai-sub':'Powered by RightlyHK · Editable','ai-loading-txt':'Drafting...','ai-r':'↻ Redraft','ai-s':'💪 Stronger','ai-rf':'📋 Add ref.','ai-zh':'🌐 繁中','bk3':'← Back','n3':'Review & Send →','s4lbl':'Step 4 of 4 — Review & Submit','rvl1':'Provider:','rvl2':'Issue:','rvl3':'Sending to:','rvl4':'Tracked from:','rvl5':'Your email:','lbl-final':'Final email (editable)','lbl-fnote':'All provider replies to your Case ID address are tracked. Unresolved after 30 days? Escalate to OFCA.','bk4':'← Back','n4':'Send Complaint ✉️','suc-title':'Complaint Sent!','suc-sent':'Sent to','suc-from':'from','suc-keep':'Keep your Case ID for all follow-ups.','suc-esc':'Unresolved after 30 days? Escalate to','suc-or':'or the','suc-cc':'Consumer Council','n-reset':'File Another Complaint','footer-txt':'A free consumer rights platform for Hong Kong telecommunications complaints. Not affiliated with OFCA or any telecom provider.','fab':'🔒 Admin','bl-list-title':'Consumer Rights Guides','bl-list-sub':'Know your rights. File smarter complaints.','bl-breadcrumb':'Home › Guides','bl-count':'6 guides available','bc-home':'Home','bc-guides':'Guides','cta-title':'Ready to file your complaint?','cta-sub':'Use RightlyHK — free, no login, AI-powered email drafting.','cta-btn':'File a Complaint →','sb-title':'More Guides','blog-prev':'← Previous','blog-next':'Next →'},
-  zh:{'nav-complaint':'提交投訴','nav-guides':'消費者指南','lang-btn':'EN','h-title':'您的權益，您的聲音，一步解決。','h-sub':'香港免費電訊投訴平台——AI數分鐘內代筆專業投訴信，電郵全程追蹤。','hero-cta1':'立即提交投訴','hero-cta2':'閱讀指南','hw1h':'選擇電訊商','hw1p':'選擇您的電訊公司','hw2h':'選擇問題','hw2p':'告訴我們出了什麼問題','hw3h':'填寫詳情及潤色','hw3p':'描述及AI潤色','hw4h':'審閱並發送','hw4p':'確認並提交','wiz-title':'📋 提交投訴——無需登記','s1lbl':'第1步（共4步）——選擇您的電訊商','lbl-fixed':'固網／寬頻','lbl-mobile':'流動電話','lbl-custom-btn':'找不到您的電訊商？手動輸入','lbl-cn':'公司名稱 *','lbl-ce':'公司投訴電郵（選填）','n1':'下一步 →','s2lbl':'第2步（共4步）——選擇投訴問題','ib1':'💳 賬單／多收費用','ib2':'📡 服務中斷','ib3':'📄 合約糾紛','ib4':'📶 訊號差／網速慢','ib5':'📱 號碼攜帶／SIM問題','ib6':'🎧 客戶服務','ib7':'❌ 取消服務問題','ib8':'❓ 其他','bk2':'← 返回','n2':'下一步 →','s3lbl':'第3步（共4步）——填寫詳情及AI潤色電郵','lbl-name':'您的姓名 *','lbl-phone':'電話號碼（選填）','lbl-ref':'參考編號（選填）','lbl-contract':'合約開始日期（選填）','lbl-plan':'服務計劃名稱（選填）','lbl-ue':'您的電郵地址 *','ue-hint':'必填——我們將向您發送副本及案件更新。','lbl-det':'補充說明（選填）','det-ph':'還有其他想補充嗎？上面的問題已涵蓋主要事實。','contact-hdr':'✉️ 您的聯絡資料——用於發送信件及追蹤回覆','draft-lang-lbl':'信件語言','draft-lang-sub':'建議以英文發送以獲得更快回應——您可隨時切換至繁中預覽及理解信件內容，發送前再切換回英文。','lbl-tone':'語氣','tb1':'正式','tb2':'強硬果斷','tb3':'簡潔','ai-sub':'由RightlyHK提供支援 · 可編輯','ai-loading-txt':'正在起草……','ai-r':'↻ 重新起草','ai-s':'💪 加強語氣','ai-rf':'📋 加入參考編號','ai-zh':'🌐 繁中','bk3':'← 返回','n3':'審閱並發送 →','s4lbl':'第4步（共4步）——審閱並提交','rvl1':'電訊商：','rvl2':'問題：','rvl3':'發送至：','rvl4':'追蹤地址：','rvl5':'您的電郵：','lbl-final':'最終電郵（可編輯）','lbl-fnote':'所有電訊商回覆至您的案件編號地址均會被追蹤。30天後仍未解決？可向OFCA上報。','bk4':'← 返回','n4':'發送投訴 ✉️','suc-title':'投訴已發送！','suc-sent':'已發送至','suc-from':'發件地址','suc-keep':'請保留您的案件編號以便跟進。','suc-esc':'30天後仍未解決？可向','suc-or':'或','suc-cc':'消費者委員會','n-reset':'再提交一個投訴','footer-txt':'香港電訊投訴免費消費者權益平台。與OFCA或任何電訊商無關聯。','fab':'🔒 管理員','bl-list-title':'消費者權益指南','bl-list-sub':'了解您的權利，提交更有力的投訴。','bl-breadcrumb':'主頁 › 指南','bl-count':'共6篇指南','bc-home':'主頁','bc-guides':'指南','cta-title':'準備好提交投訴了嗎？','cta-sub':'使用RightlyHK——免費、無需登記、AI輔助起草電郵。','cta-btn':'立即提交投訴 →','sb-title':'更多指南','blog-prev':'← 上一篇','blog-next':'下一篇 →'}
+  en:{'nav-complaint':'File Complaint','nav-guides':'Guides','lang-btn':'繁中','h-title':'Your Rights. Your Voice. Resolved.','h-sub':"Hong Kong's free telecom complaints platform — AI drafts your professional complaint letter in minutes, with every reply tracked by email.",'hero-cta1':'Start My Complaint','hero-cta2':'Read Guides','hw1h':'Pick Provider','hw1p':'Select your telecom company','hw2h':'Choose Issue','hw2p':'Tell us what went wrong','hw3h':'Add Details & Polish','hw3p':'Describe & AI-polish','hw4h':'Review & Send','hw4p':'Confirm and submit','wiz-title':'📋 File a Complaint — No Login Required','s1lbl':'Step 1 of 4 — Select your telecom provider','lbl-fixed':'Fixed Line / Broadband','lbl-mobile':'Mobile','lbl-esim':'eSIM / Prepaid / MVNO','lbl-custom-btn':'Company not listed? Enter manually','lbl-cn':'Company name *','lbl-ce':'Company complaint email (optional)','n1':'Next →','s2lbl':'Step 2 of 4 — What is the issue?','ib1':'💳 Billing / Overcharge','ib2':'📡 Service Outage','ib3':'📄 Contract Dispute','ib4':'📶 Poor Signal / Speed','ib5':'📱 Porting / SIM Issue','ib6':'🎧 Customer Service','ib7':'❌ Cancellation Problem','ib8':'❓ Other','ib9':'🎯 Mis-selling / Sales Misconduct','ib10':'🔧 Installation / Technician Visit','ib11':'✈️ Roaming Charges','ib12':'📦 Equipment / Router Issue','ib13':'💰 Prepaid Card / Top-up Issue','ib14':'🔐 Data Privacy Concern','ib15':'🔄 Auto-renewal / Contract Expiry Trap','ib16':'🛜 Pocket WiFi / Rental Device','ib17':'➕ Unwanted Value-added Services','bk2':'← Back','n2':'Next →','s3lbl':'Step 3 of 4 — Your details & AI-polished email','lbl-name':'Your name *','lbl-phone':'Phone number (optional)','lbl-ref':'Reference number (optional)','lbl-contract':'Contract start date (optional)','lbl-plan':'Service plan name (optional)','lbl-ue':'Your email address *','ue-hint':'Required — we will send you a copy and case updates.','lbl-det':'Additional details (optional)','det-ph':'Anything else you want to add? The questions above already cover the key facts.','contact-hdr':'✉️ Your contact details — so we can send the letter and track replies','draft-lang-lbl':'Letter language','draft-lang-sub':'We recommend sending in English for faster response — you can switch to 繁中 anytime to preview and understand the letter, then switch back before sending.','lbl-tone':'Tone','tb1':'Formal','tb2':'Firm & Assertive','tb3':'Concise','ai-sub':'Powered by RightlyHK · Editable','ai-loading-txt':'Drafting...','ai-r':'↻ Redraft','ai-s':'💪 Stronger','ai-rf':'📋 Add ref.','ai-zh':'🌐 繁中','bk3':'← Back','n3':'Review & Send →','s4lbl':'Step 4 of 4 — Review & Submit','rvl1':'Provider:','rvl2':'Issue:','rvl3':'Sending to:','rvl4':'Tracked from:','rvl5':'Your email:','lbl-final':'Final email (editable)','lbl-fnote':'All provider replies to your Case ID address are tracked. Unresolved after 30 days? Escalate to OFCA.','bk4':'← Back','n4':'Send Complaint ✉️','suc-title':'Complaint Sent!','suc-sent':'Sent to','suc-from':'from','suc-keep':'Keep your Case ID for all follow-ups.','suc-esc':'Unresolved after 30 days? Escalate to','suc-or':'or the','suc-cc':'Consumer Council','n-reset':'File Another Complaint','footer-txt':'A free consumer rights platform for Hong Kong telecommunications complaints. Not affiliated with OFCA or any telecom provider.','fab':'🔒 Admin','bl-list-title':'Consumer Rights Guides','bl-list-sub':'Know your rights. File smarter complaints.','bl-breadcrumb':'Home › Guides','bl-count':'6 guides available','bc-home':'Home','bc-guides':'Guides','cta-title':'Ready to file your complaint?','cta-sub':'Use RightlyHK — free, no login, AI-powered email drafting.','cta-btn':'File a Complaint →','sb-title':'More Guides','blog-prev':'← Previous','blog-next':'Next →'},
+  zh:{'nav-complaint':'提交投訴','nav-guides':'消費者指南','lang-btn':'EN','h-title':'您的權益，您的聲音，一步解決。','h-sub':'香港免費電訊投訴平台——AI數分鐘內代筆專業投訴信，電郵全程追蹤。','hero-cta1':'立即提交投訴','hero-cta2':'閱讀指南','hw1h':'選擇電訊商','hw1p':'選擇您的電訊公司','hw2h':'選擇問題','hw2p':'告訴我們出了什麼問題','hw3h':'填寫詳情及潤色','hw3p':'描述及AI潤色','hw4h':'審閱並發送','hw4p':'確認並提交','wiz-title':'📋 提交投訴——無需登記','s1lbl':'第1步（共4步）——選擇您的電訊商','lbl-fixed':'固網／寬頻','lbl-mobile':'流動電話','lbl-esim':'eSIM／預付卡／虛擬電訊商','lbl-custom-btn':'找不到您的電訊商？手動輸入','lbl-cn':'公司名稱 *','lbl-ce':'公司投訴電郵（選填）','n1':'下一步 →','s2lbl':'第2步（共4步）——選擇投訴問題','ib1':'💳 賬單／多收費用','ib2':'📡 服務中斷','ib3':'📄 合約糾紛','ib4':'📶 訊號差／網速慢','ib5':'📱 號碼攜帶／SIM問題','ib6':'🎧 客戶服務','ib7':'❌ 取消服務問題','ib8':'❓ 其他','ib9':'🎯 銷售誤導／不良銷售手法','ib10':'🔧 上門安裝／技術員','ib11':'✈️ 漫遊收費','ib12':'📦 設備／路由器問題','ib13':'💰 預付卡／增值問題','ib14':'🔐 個人資料私隱','ib15':'🔄 自動續約／約滿陷阱','ib16':'🛜 Wi-Fi蛋／租借裝置','ib17':'➕ 未經同意的增值服務','bk2':'← 返回','n2':'下一步 →','s3lbl':'第3步（共4步）——填寫詳情及AI潤色電郵','lbl-name':'您的姓名 *','lbl-phone':'電話號碼（選填）','lbl-ref':'參考編號（選填）','lbl-contract':'合約開始日期（選填）','lbl-plan':'服務計劃名稱（選填）','lbl-ue':'您的電郵地址 *','ue-hint':'必填——我們將向您發送副本及案件更新。','lbl-det':'補充說明（選填）','det-ph':'還有其他想補充嗎？上面的問題已涵蓋主要事實。','contact-hdr':'✉️ 您的聯絡資料——用於發送信件及追蹤回覆','draft-lang-lbl':'信件語言','draft-lang-sub':'建議以英文發送以獲得更快回應——您可隨時切換至繁中預覽及理解信件內容，發送前再切換回英文。','lbl-tone':'語氣','tb1':'正式','tb2':'強硬果斷','tb3':'簡潔','ai-sub':'由RightlyHK提供支援 · 可編輯','ai-loading-txt':'正在起草……','ai-r':'↻ 重新起草','ai-s':'💪 加強語氣','ai-rf':'📋 加入參考編號','ai-zh':'🌐 繁中','bk3':'← 返回','n3':'審閱並發送 →','s4lbl':'第4步（共4步）——審閱並提交','rvl1':'電訊商：','rvl2':'問題：','rvl3':'發送至：','rvl4':'追蹤地址：','rvl5':'您的電郵：','lbl-final':'最終電郵（可編輯）','lbl-fnote':'所有電訊商回覆至您的案件編號地址均會被追蹤。30天後仍未解決？可向OFCA上報。','bk4':'← 返回','n4':'發送投訴 ✉️','suc-title':'投訴已發送！','suc-sent':'已發送至','suc-from':'發件地址','suc-keep':'請保留您的案件編號以便跟進。','suc-esc':'30天後仍未解決？可向','suc-or':'或','suc-cc':'消費者委員會','n-reset':'再提交一個投訴','footer-txt':'香港電訊投訴免費消費者權益平台。與OFCA或任何電訊商無關聯。','fab':'🔒 管理員','bl-list-title':'消費者權益指南','bl-list-sub':'了解您的權利，提交更有力的投訴。','bl-breadcrumb':'主頁 › 指南','bl-count':'共6篇指南','bc-home':'主頁','bc-guides':'指南','cta-title':'準備好提交投訴了嗎？','cta-sub':'使用RightlyHK——免費、無需登記、AI輔助起草電郵。','cta-btn':'立即提交投訴 →','sb-title':'更多指南','blog-prev':'← 上一篇','blog-next':'下一篇 →'}
 };
 
 function toggleLang(){lang=lang==='en'?'zh':'en';blogLang=lang;ge('bl-en').className='bl-btn'+(lang==='en'?' on':'');ge('bl-zh').className='bl-btn'+(lang==='zh'?' on':'');applyLang();}
 function applyLang(){
   var L=T[lang];
-  var ids=['nav-complaint','nav-guides','lang-btn','h-title','h-sub','hero-cta1','hero-cta2','hw1h','hw1p','hw2h','hw2p','hw3h','hw3p','hw4h','hw4p','wiz-title','s1lbl','lbl-fixed','lbl-mobile','lbl-custom-btn','lbl-cn','lbl-ce','n1','s2lbl','ib1','ib2','ib3','ib4','ib5','ib6','ib7','ib8','bk2','n2','s3lbl','lbl-name','lbl-phone','lbl-ref','lbl-contract','lbl-plan','lbl-ue','ue-hint','lbl-det','draft-lang-lbl','draft-lang-sub','lbl-tone','tb1','tb2','tb3','ai-sub','ai-loading-txt','ai-r','ai-s','ai-rf','ai-zh','bk3','n3','s4lbl','rvl1','rvl2','rvl3','rvl4','rvl5','lbl-final','lbl-fnote','bk4','n4','suc-title','suc-sent','suc-from','suc-keep','suc-esc','suc-or','suc-cc','n-reset','footer-txt','fab','contact-hdr','bl-list-title','bl-list-sub','bl-breadcrumb','bl-count','bc-home','bc-guides','cta-title','cta-sub','cta-btn','sb-title'];
+  var ids=['nav-complaint','nav-guides','lang-btn','h-title','h-sub','hero-cta1','hero-cta2','hw1h','hw1p','hw2h','hw2p','hw3h','hw3p','hw4h','hw4p','wiz-title','s1lbl','lbl-fixed','lbl-mobile','lbl-esim','lbl-custom-btn','lbl-cn','lbl-ce','n1','s2lbl','ib1','ib2','ib3','ib4','ib5','ib6','ib7','ib8','ib9','ib10','ib11','ib12','ib13','ib14','ib15','ib16','ib17','bk2','n2','s3lbl','lbl-name','lbl-phone','lbl-ref','lbl-contract','lbl-plan','lbl-ue','ue-hint','lbl-det','draft-lang-lbl','draft-lang-sub','lbl-tone','tb1','tb2','tb3','ai-sub','ai-loading-txt','ai-r','ai-s','ai-rf','ai-zh','bk3','n3','s4lbl','rvl1','rvl2','rvl3','rvl4','rvl5','lbl-final','lbl-fnote','bk4','n4','suc-title','suc-sent','suc-from','suc-keep','suc-esc','suc-or','suc-cc','n-reset','footer-txt','fab','contact-hdr','bl-list-title','bl-list-sub','bl-breadcrumb','bl-count','bc-home','bc-guides','cta-title','cta-sub','cta-btn','sb-title'];
   ids.forEach(function(id){var el=ge(id);if(el&&L[id]!==undefined)el.textContent=L[id];});
   var phs={'det':'det-ph','uemail':'uemail-ph'};
   var el=ge('det');if(el)el.placeholder=L['det-ph']||'';
@@ -785,7 +924,7 @@ function applyLang(){
 var posts=[
   {tag:{en:'BILLING',zh:'賬單'},en:{title:'How to dispute an unexpected charge on your telecom bill',summary:'Know your rights when a provider adds unauthorised charges to your bill.',meta:'5 min read · Billing',body:'<p>Discovering an unexpected charge on your telecom bill is frustrating — but you have clear rights under Hong Kong law to dispute it.</p><h3>Step 1: Identify the charge</h3><p>Check your bill carefully. Providers are required under the <strong>Telecommunications Ordinance (Cap. 106)</strong> to provide itemised billing upon request.</p><h3>Step 2: Raise a formal written complaint</h3><p>Send a written complaint via email or the provider\'s official complaints channel. This creates a paper trail.</p><h3>Step 3: Know the timeline</h3><p>Under OFCA guidelines, providers must acknowledge within <strong>5 working days</strong> and resolve within <strong>30 days</strong>.</p><h3>Step 4: Escalate to OFCA if needed</h3><p>If the provider refuses or does not respond within 30 days, file a complaint with OFCA at ofca.gov.hk.</p><div class="blog-tip">💡 Use RightlyHK to draft and send your complaint email in minutes.</div>'},zh:{title:'如何對抗電訊帳單上的不明收費',summary:'了解您在OFCA法規下的權利，當電訊商在您的月結單中加入未經授權的收費時應如何處理。',meta:'5分鐘閱讀 · 賬單',body:'<p>發現電訊帳單上出現不明收費令人沮喪——但根據香港法律，您有明確的權利提出異議。</p><h3>第一步：識別收費項目</h3><p>根據《電訊條例》（第106章），電訊商必須在要求下提供詳細帳單。</p><h3>第二步：提出正式書面投訴</h3><p>透過電郵或官方投訴渠道提交書面投訴，建立書面記錄。</p><h3>第三步：了解處理時限</h3><p>電訊商必須在<strong>5個工作天</strong>內確認，並在<strong>30天</strong>內解決問題。</p><h3>第四步：必要時向OFCA上報</h3><p>如30天內未有回應，請向OFCA（ofca.gov.hk）提交投訴。</p><div class="blog-tip">💡 使用RightlyHK在數分鐘內起草並發送您的投訴電郵。</div>'}},
   {tag:{en:'CONTRACTS',zh:'合約'},en:{title:'Early termination fees: what providers can and cannot charge',summary:"A breakdown of Hong Kong's rules on contract lock-in periods.",meta:'7 min read · Contracts',body:'<p>Trapped in a contract you want to leave? Hong Kong has specific rules about what providers can charge when you exit early.</p><h3>What the law says</h3><p>ETFs must be proportionate and clearly disclosed at signing under the Consumer Council\'s Code of Practice and OFCA guidelines.</p><h3>When you may NOT have to pay</h3><ul><li>Provider changed contract terms without your consent</li><li>Service quality was consistently below the agreed standard</li><li>ETF was not clearly disclosed before signing</li><li>You are moving where the service is unavailable</li></ul><h3>How to dispute an ETF</h3><p>Write to the provider with your specific reason and evidence. If refused, escalate to OFCA.</p><div class="blog-tip">💡 Always get verbal promises in writing before signing.</div>'},zh:{title:'提前終止合約費用：電訊商可以及不可以收取的費用',summary:'詳解香港關於合約鎖定期的規定。',meta:'7分鐘閱讀 · 合約',body:'<p>被困在一份您想離開的合約中？香港對電訊商在您提前退出時可以收取的費用有具體規定。</p><h3>法律規定</h3><p>提前終止費必須合乎比例，並在簽約時清楚披露。</p><h3>您可能無需支付的情況</h3><ul><li>電訊商未經您同意更改合約條款</li><li>服務質量持續低於協議標準</li><li>簽約前未清楚披露提前終止費</li><li>您遷往服務無法覆蓋的地址</li></ul><h3>如何對提前終止費提出異議</h3><p>致函電訊商，列明原因並附上證據。如被拒絕，請向OFCA上報。</p><div class="blog-tip">💡 簽約前務必將所有口頭承諾以書面形式記錄。</div>'}},
-  {tag:{en:'SERVICE QUALITY',zh:'服務質素'},en:{title:'Your rights when broadband speeds fall below what was promised',summary:'Providers must deliver advertised speeds. Learn what remedies are available.',meta:'6 min read · Service Quality',body:'<p>You signed up for 1000Mbps but are getting 50Mbps. You have rights — and tools to enforce them.</p><h3>Understand "up to" speeds</h3><p>OFCA\'s Broadband Performance Test (speedtest.ofca.gov.hk) measures real-world performance. Consistently under 70–80% of advertised speed is grounds for complaint.</p><h3>How to document your case</h3><ul><li>Run speed tests 3× daily for 7 days using OFCA\'s official tool</li><li>Test via wired connection, not Wi-Fi</li><li>Screenshot every result with date and time</li></ul><h3>What remedies can you claim?</h3><p>Bill credit, partial refund, or early contract exit without penalty.</p><div class="blog-tip">💡 OFCA\'s speed test tool gives your complaint far more weight than a third-party tool.</div>'},zh:{title:'當寬頻速度低於承諾標準時您的權利',summary:'電訊商必須提供所宣傳的網速。了解可獲得的補救措施。',meta:'6分鐘閱讀 · 服務質素',body:'<p>您申請了1000Mbps但只獲得50Mbps？您有權利，也有工具來維護它。</p><h3>了解「高達」速度</h3><p>OFCA的寬頻網絡表現測試（speedtest.ofca.gov.hk）可測量實際網速。若持續低於70-80%，您有理由提出投訴。</p><h3>如何記錄您的案例</h3><ul><li>連續7天，每天至少3次速度測試</li><li>透過有線連接測試</li><li>截圖並保存每次結果</li></ul><h3>補救措施</h3><p>帳單抵扣、部分退款，或免罰提前終止合約。</p><div class="blog-tip">💡 OFCA的速度測試工具比第三方工具更具說服力。</div>'}},
+  {tag:{en:'SERVICE QUALITY',zh:'服務質素'},en:{title:'Your rights when broadband speeds fall below what was promised',summary:'Providers must deliver advertised speeds. Learn what remedies are available.',meta:'6 min read · Service Quality',body:'<p>You signed up for 1000Mbps but are getting 50Mbps. You have rights — and tools to enforce them.</p><h3>Understand "up to" speeds</h3><p>Many providers advertise "up to" speeds. Run independent speed tests to measure real-world performance. Consistently under 70–80% of advertised speed is grounds for complaint.</p><h3>How to document your case</h3><ul><li>Run speed tests 3× daily for 7 days using a reputable speed test tool</li><li>Test via wired connection, not Wi-Fi</li><li>Screenshot every result with date and time</li></ul><h3>What remedies can you claim?</h3><p>Bill credit, partial refund, or early contract exit without penalty.</p><div class="blog-tip">💡 Consistent, dated speed test records are the strongest evidence for your complaint.</div>'},zh:{title:'當寬頻速度低於承諾標準時您的權利',summary:'電訊商必須提供所宣傳的網速。了解可獲得的補救措施。',meta:'6分鐘閱讀 · 服務質素',body:'<p>您申請了1000Mbps但只獲得50Mbps？您有權利，也有工具來維護它。</p><h3>了解「高達」速度</h3><p>許多電訊商宣傳「高達」某速度。使用獨立測速工具測量實際網速。若持續低於宣傳速度的70-80%，您有理由提出投訴。</p><h3>如何記錄您的案例</h3><ul><li>連續7天，每天至少3次速度測試</li><li>透過有線連接測試</li><li>截圖並保存每次結果</li></ul><h3>補救措施</h3><p>帳單抵扣、部分退款，或免罰提前終止合約。</p><div class="blog-tip">💡 持續且有日期記錄的測速結果，是投訴的最有力證據。</div>'}},
   {tag:{en:'ESCALATION',zh:'上報'},en:{title:'When and how to escalate to OFCA: a step-by-step guide',summary:'If your complaint is unresolved after 30 days, escalate to OFCA.',meta:'4 min read · Escalation',body:'<p>Escalating to OFCA is one of the most powerful tools available to Hong Kong telecom consumers.</p><h3>When can you escalate?</h3><ul><li>Provider has not resolved within <strong>30 days</strong></li><li>You received an unsatisfactory final response</li><li>The provider has not responded at all</li></ul><h3>How to file with OFCA</h3><ol><li>Go to ofca.gov.hk → Complaints</li><li>Complete the online complaint form</li><li>Attach all correspondence including your RightlyHK Case ID emails</li><li>State clearly what resolution you are seeking</li></ol><h3>Other escalation bodies</h3><p><strong>Consumer Council</strong> (consumer.org.hk) · <strong>Small Claims Tribunal</strong> for disputes under HK$75,000</p><div class="blog-tip">💡 Your RightlyHK Case ID email trail is perfect evidence for OFCA.</div>'},zh:{title:'何時及如何向OFCA上報：逐步指南',summary:'若您的投訴在30天後仍未解決，您有權向OFCA上報。',meta:'4分鐘閱讀 · 上報',body:'<p>向OFCA上報是香港電訊消費者最有力的工具之一。</p><h3>何時可以上報？</h3><ul><li>電訊商未能在<strong>30天</strong>內解決</li><li>您收到了不令人滿意的最終回覆</li><li>電訊商完全沒有回應</li></ul><h3>如何向OFCA提交投訴</h3><ol><li>前往ofca.gov.hk → 投訴</li><li>填寫網上投訴表格</li><li>附上所有往來文件</li><li>清楚說明所尋求的解決方案</li></ol><h3>其他上報機構</h3><p><strong>消費者委員會</strong>（consumer.org.hk）· <strong>小額錢債審裁處</strong></p><div class="blog-tip">💡 您的RightlyHK案件編號電郵記錄是向OFCA提供的完美證據。</div>'}},
   {tag:{en:'SIM & PORTING',zh:'號碼攜帶'},en:{title:'SIM card porting: your rights when switching providers',summary:'Switching providers should be simple. Know the rules if your port is delayed.',meta:'5 min read · SIM & Porting',body:'<p>Number portability is your right in Hong Kong. Providers cannot hold your number hostage.</p><h3>How long should porting take?</h3><p>Under OFCA rules, a port should complete within <strong>1 working day</strong> once approved.</p><h3>Common blocking tactics</h3><ul><li>Claiming you have an outstanding balance</li><li>Saying your contract has not ended</li><li>Requiring a physical store visit</li><li>Applying an ETF to delay the process</li></ul><h3>What to do if blocked</h3><p>File a written complaint citing the <strong>Mobile Number Portability Code</strong>. If unresolved in 5 working days, escalate to OFCA.</p><div class="blog-tip">💡 Keep your old SIM active until the port is confirmed complete.</div>'},zh:{title:'電話號碼攜帶：轉換電訊商時您的權利',summary:'轉換電訊商應該很簡單。了解相關規定。',meta:'5分鐘閱讀 · 號碼攜帶',body:'<p>號碼可攜性是您在香港的權利。電訊商不能扣押您的號碼。</p><h3>號碼攜帶需要多長時間？</h3><p>根據OFCA規定，一旦獲批應在<strong>1個工作天</strong>內完成。</p><h3>常見阻撓手法</h3><ul><li>聲稱您有未付結欠</li><li>聲稱合約未到期</li><li>要求親身前往門市</li><li>徵收提前終止費</li></ul><h3>若號碼攜帶被阻止</h3><p>立即引用<strong>流動電話號碼可攜性守則</strong>提交書面投訴。5個工作天內未解決則向OFCA上報。</p><div class="blog-tip">💡 在確認攜帶完成前，請保持舊SIM卡啟用。</div>'}},
   {tag:{en:'CUSTOMER SERVICE',zh:'客戶服務'},en:{title:"What to do when a telecom provider's customer service fails you",summary:"Poor customer service is itself a complaint issue.",meta:'4 min read · Customer Service',body:'<p>Being stuck on hold or given conflicting information is a failure of the provider\'s obligations.</p><h3>Document every interaction</h3><p>Note date, time, agent name, and what was said. Follow each call with an email summary.</p><h3>Escalate within the provider first</h3><p>Ask for a supervisor or the Customer Relations Department. Request their direct contact in writing.</p><h3>Use the formal complaints channel</h3><p>Every licensed provider must have a formal written complaints procedure that triggers a regulatory timeline.</p><h3>Go public if necessary</h3><p>The Consumer Council publishes complaint statistics by provider.</p><div class="blog-tip">💡 A formal email via RightlyHK carries more weight than a phone call.</div>'},zh:{title:'當電訊商客戶服務令您失望時該怎辦',summary:'惡劣的客戶服務本身就是一個投訴問題。',meta:'4分鐘閱讀 · 客戶服務',body:'<p>被長時間擱置或收到相互矛盾的信息，是電訊商未能履行責任的表現。</p><h3>記錄每次互動</h3><p>記錄日期、時間、客服姓名及所說內容。每次電話後以電郵跟進。</p><h3>先在電訊商內部升級</h3><p>要求與主管或客戶關係部門交談。</p><h3>使用正式投訴渠道</h3><p>每家持牌電訊商必須設有正式書面投訴程序。</p><h3>必要時公開事件</h3><p>消費者委員會按電訊商公布投訴統計數字。</p><div class="blog-tip">💡 透過RightlyHK發送的正式電郵比電話更具分量。</div>'}}
