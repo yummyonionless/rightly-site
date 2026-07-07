@@ -545,16 +545,41 @@ function switchFinalToEN(){
     banner.innerHTML='<div style="font-size:13px;font-weight:600;color:var(--green)">✅ '+(lang==='zh'?'已轉為英文版本，可以發送了！':'Switched to the English version — ready to send!')+'</div>';
   }
 }
+var MAKE_WEBHOOK_URL='https://hook.us2.make.com/modwpxhewiviapet4pka37kdno58si7h';
+
 function doSubmit(){
   caseN++;
   var cid='CAS-2026-'+String(caseN).padStart(5,'0');
-  ge('case-badge').textContent=cid;
-  ge('s-to').textContent=getProvEmail();
-  ge('s-from').textContent=cid.toLowerCase()+'@rightlyhk.com';
-  // PRODUCTION: this is where the backend API call goes —
-  // POST /api/submit { caseId, provider, providerEmail, issue, letter, userName, userEmail }
-  // The server then sends the email FROM caseid@rightlyhk.com via SendGrid/SES.
-  goStep(5);
+  var btn=ge('n4');
+  if(btn){btn.disabled=true;btn.textContent=lang==='zh'?'發送中……':'Sending...';}
+  var payload={
+    caseId:cid,
+    date:new Date().toISOString(),
+    provider:prov,
+    providerEmail:getProvEmail(),
+    issue:issue,
+    letter:gv('final-email'),
+    userName:gv('fullname'),
+    userEmail:gv('uemail'),
+    status:'Open'
+  };
+  var xhr=new XMLHttpRequest();
+  xhr.open('POST',MAKE_WEBHOOK_URL,true);
+  xhr.setRequestHeader('Content-Type','application/json');
+  xhr.onreadystatechange=function(){
+    if(xhr.readyState===4){
+      if(btn){btn.disabled=false;btn.textContent=lang==='zh'?'發送投訴 ✉️':'Send Complaint ✉️';}
+      if(xhr.status>=200&&xhr.status<300){
+        ge('case-badge').textContent=cid;
+        ge('s-to').textContent=getProvEmail();
+        ge('s-from').textContent=cid.toLowerCase()+'@rightlyhk.com';
+        goStep(5);
+      } else {
+        alert(lang==='zh'?'發送失敗，請稍後再試。':'Submission failed. Please try again.');
+      }
+    }
+  };
+  xhr.send(JSON.stringify(payload));
 }
 function resetWizard(){
   prov='';issue='';tone='formal';draftLang='en';
